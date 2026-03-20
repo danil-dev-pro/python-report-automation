@@ -1,0 +1,1195 @@
+2026-03-20 17:58:08 | INFO     | root                      | Starting Telegram Bot...
+2026-03-20 17:58:08 | CRITICAL | root                      | BOT_TOKEN is not set. Copy .env.example → .env and fill in your token.
+2026-03-20 17:59:23 | INFO     | root                      | Starting Telegram Bot...
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered user handler: CommandHandler
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered user handler: ConversationHandler
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered user handler: CallbackQueryHandler
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered user handler: CallbackQueryHandler
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered user handler: CallbackQueryHandler
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered user handler: CallbackQueryHandler
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered admin handler: ConversationHandler
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered admin handler: ConversationHandler
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered admin handler: CallbackQueryHandler
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered admin handler: CallbackQueryHandler
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered admin handler: CallbackQueryHandler
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered admin handler: CallbackQueryHandler
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered admin handler: CallbackQueryHandler
+2026-03-20 17:59:25 | DEBUG    | HandlerRegistry           | Registered admin handler: CallbackQueryHandler
+2026-03-20 17:59:25 | INFO     | HandlerRegistry           | All handlers registered successfully (14 total).
+2026-03-20 17:59:25 | INFO     | root                      | Bot is running. Press Ctrl+C to stop.
+2026-03-20 17:59:25 | DEBUG    | asyncio                   | Using proactor: IocpProactor
+2026-03-20 17:59:25 | DEBUG    | telegram.ext.ExtBot       | Entering: get_me
+2026-03-20 17:59:32 | DEBUG    | telegram.ext.ExtBot       | User(api_kwargs={'can_connect_to_business': False, 'has_main_web_app': False, 'has_topics_enabled': False, 'allows_users_to_create_topics': False}, can_join_groups=True, can_read_all_group_messages=False, first_name='My Service Bot', id=8591411527, is_bot=True, supports_inline_queries=False, username='my7service14_bot')
+2026-03-20 17:59:32 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_me
+2026-03-20 17:59:32 | DEBUG    | telegram.ext.ExtBot       | This Bot is already initialized.
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | executing <function connect.<locals>.connector at 0x000001D90F303EC0>
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | operation <function connect.<locals>.connector at 0x000001D90F303EC0> completed
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'PRAGMA journal_mode=WAL;', [])
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'PRAGMA journal_mode=WAL;', []) completed
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'PRAGMA foreign_keys=ON;', [])
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'PRAGMA foreign_keys=ON;', []) completed
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, "\n    CREATE TABLE IF NOT EXISTS users (\n        user_id     INTEGER PRIMARY KEY,\n        username    TEXT,\n        first_name  TEXT,\n        last_name   TEXT,\n        joined_at   TEXT NOT NULL DEFAULT (datetime('now'))\n    );\n    ", [])
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, "\n    CREATE TABLE IF NOT EXISTS users (\n        user_id     INTEGER PRIMARY KEY,\n        username    TEXT,\n        first_name  TEXT,\n        last_name   TEXT,\n        joined_at   TEXT NOT NULL DEFAULT (datetime('now'))\n    );\n    ", []) completed
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, "\n    CREATE TABLE IF NOT EXISTS orders (\n        id          INTEGER PRIMARY KEY AUTOINCREMENT,\n        user_id     INTEGER NOT NULL REFERENCES users(user_id),\n        name        TEXT NOT NULL,\n        email       TEXT NOT NULL,\n        phone       TEXT NOT NULL,\n        description TEXT NOT NULL,\n        status      TEXT NOT NULL DEFAULT 'new',\n        created_at  TEXT NOT NULL DEFAULT (datetime('now'))\n    );\n    ", [])
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, "\n    CREATE TABLE IF NOT EXISTS orders (\n        id          INTEGER PRIMARY KEY AUTOINCREMENT,\n        user_id     INTEGER NOT NULL REFERENCES users(user_id),\n        name        TEXT NOT NULL,\n        email       TEXT NOT NULL,\n        phone       TEXT NOT NULL,\n        description TEXT NOT NULL,\n        status      TEXT NOT NULL DEFAULT 'new',\n        created_at  TEXT NOT NULL DEFAULT (datetime('now'))\n    );\n    ", []) completed
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, '\n    CREATE INDEX IF NOT EXISTS idx_orders_user_id\n    ON orders(user_id);\n    ', [])
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, '\n    CREATE INDEX IF NOT EXISTS idx_orders_user_id\n    ON orders(user_id);\n    ', []) completed
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, '\n    CREATE INDEX IF NOT EXISTS idx_orders_created_at\n    ON orders(created_at);\n    ', [])
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, '\n    CREATE INDEX IF NOT EXISTS idx_orders_created_at\n    ON orders(created_at);\n    ', []) completed
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method commit of sqlite3.Connection object at 0x000001D90F2D93F0>)
+2026-03-20 17:59:32 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method commit of sqlite3.Connection object at 0x000001D90F2D93F0>) completed
+2026-03-20 17:59:32 | INFO     | database.db               | Database initialised: C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\data\bot.db
+2026-03-20 17:59:32 | INFO     | PostInit                  | Database connected: C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\data\bot.db
+2026-03-20 17:59:32 | DEBUG    | telegram.ext.ExtBot       | Entering: set_my_commands
+2026-03-20 17:59:33 | DEBUG    | telegram.ext.ExtBot       | True
+2026-03-20 17:59:33 | DEBUG    | telegram.ext.ExtBot       | Exiting: set_my_commands
+2026-03-20 17:59:33 | INFO     | PostInit                  | Bot commands registered.
+2026-03-20 17:59:33 | DEBUG    | telegram.ext.ExtBot       | Entering: get_me
+2026-03-20 17:59:33 | DEBUG    | telegram.ext.ExtBot       | User(api_kwargs={'can_connect_to_business': False, 'has_main_web_app': False, 'has_topics_enabled': False, 'allows_users_to_create_topics': False}, can_join_groups=True, can_read_all_group_messages=False, first_name='My Service Bot', id=8591411527, is_bot=True, supports_inline_queries=False, username='my7service14_bot')
+2026-03-20 17:59:33 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_me
+2026-03-20 17:59:33 | INFO     | PostInit                  | ============================================================
+2026-03-20 17:59:33 | INFO     | PostInit                  |   Bot started: @my7service14_bot (ID: 8591411527)
+2026-03-20 17:59:33 | INFO     | PostInit                  |   Environment : production
+2026-03-20 17:59:33 | INFO     | PostInit                  |   Database    : C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\data\bot.db
+2026-03-20 17:59:33 | INFO     | PostInit                  |   Log file    : C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\logs\bot.log
+2026-03-20 17:59:33 | INFO     | PostInit                  |   Admin chat  : 7422733657
+2026-03-20 17:59:33 | INFO     | PostInit                  | ============================================================
+2026-03-20 17:59:33 | DEBUG    | telegram.ext.Updater      | Updater started (polling)
+2026-03-20 17:59:33 | DEBUG    | telegram.ext.Updater      | Start network loop retry bootstrap del webhook
+2026-03-20 17:59:33 | DEBUG    | telegram.ext.Updater      | Deleting webhook
+2026-03-20 17:59:33 | DEBUG    | telegram.ext.Updater      | Dropping pending updates from Telegram server
+2026-03-20 17:59:33 | DEBUG    | telegram.ext.ExtBot       | Entering: delete_webhook
+2026-03-20 17:59:34 | DEBUG    | telegram.ext.ExtBot       | True
+2026-03-20 17:59:34 | DEBUG    | telegram.ext.ExtBot       | Exiting: delete_webhook
+2026-03-20 17:59:34 | DEBUG    | telegram.ext.Updater      | Bootstrap done
+2026-03-20 17:59:34 | DEBUG    | telegram.ext.Updater      | Waiting for polling to start
+2026-03-20 17:59:34 | DEBUG    | telegram.ext.Updater      | Polling updates from Telegram started
+2026-03-20 17:59:34 | DEBUG    | telegram.ext.Updater      | Start network loop retry getting Updates
+2026-03-20 17:59:34 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 17:59:34 | INFO     | telegram.ext.Application  | Application started
+2026-03-20 17:59:47 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 17:59:47 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 17:59:47 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 17:59:47 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 17:59:57 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 17:59:57 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 17:59:57 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 17:59:57 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:00:08 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:00:08 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:00:08 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:00:08 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:00:18 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:00:18 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:00:18 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:00:18 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:00:28 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:00:28 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:00:28 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:00:28 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:00:39 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:00:39 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:00:39 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:00:39 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:00:41 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242021]
+2026-03-20 18:00:41 | DEBUG    | telegram.ext.ExtBot       | (Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 0, 39, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=6, offset=0, type=<MessageEntityType.BOT_COMMAND>),), from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=1, supergroup_chat_created=False, text='/start'), update_id=541242021),)
+2026-03-20 18:00:41 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:00:41 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:00:41 | DEBUG    | telegram.ext.Application  | Processing update Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 0, 39, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=6, offset=0, type=<MessageEntityType.BOT_COMMAND>),), from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=1, supergroup_chat_created=False, text='/start'), update_id=541242021)
+2026-03-20 18:00:41 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, '\n            INSERT INTO users (user_id, username, first_name, last_name)\n            VALUES (?, ?, ?, ?)\n            ON CONFLICT(user_id) DO UPDATE SET\n                username   = excluded.username,\n                first_name = excluded.first_name,\n                last_name  = excluded.last_name\n            ', (7422733657, 'danil14055', 'Данил', None))
+2026-03-20 18:00:41 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, '\n            INSERT INTO users (user_id, username, first_name, last_name)\n            VALUES (?, ?, ?, ?)\n            ON CONFLICT(user_id) DO UPDATE SET\n                username   = excluded.username,\n                first_name = excluded.first_name,\n                last_name  = excluded.last_name\n            ', (7422733657, 'danil14055', 'Данил', None)) completed
+2026-03-20 18:00:41 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method commit of sqlite3.Connection object at 0x000001D90F2D93F0>)
+2026-03-20 18:00:41 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method commit of sqlite3.Connection object at 0x000001D90F2D93F0>) completed
+2026-03-20 18:00:41 | DEBUG    | database.db               | Upserted user: 7422733657 (@danil14055)
+2026-03-20 18:00:41 | INFO     | handlers.user             | User 7422733657 (danil14055) triggered /start
+2026-03-20 18:00:41 | DEBUG    | telegram.ext.ExtBot       | Entering: send_message
+2026-03-20 18:00:45 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 0, 44, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=22, offset=3, type=<MessageEntityType.BOLD>),), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=2, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_consultation', text='💼 Consultation'), InlineKeyboardButton(callback_data='menu_order', text='📋 Order Service')), (InlineKeyboardButton(callback_data='menu_faq', text='❓ FAQ'), InlineKeyboardButton(callback_data='menu_contacts', text='📬 Contacts')))), supergroup_chat_created=False, text='👋 Welcome to ServiceBot!\n\nWe provide professional digital services:\n• Web & mobile development\n• Business consulting\n• Technical support & maintenance\n\nChoose an option below to get started:')
+2026-03-20 18:00:45 | DEBUG    | telegram.ext.ExtBot       | Exiting: send_message
+2026-03-20 18:00:51 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:00:51 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:00:51 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:00:51 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:00:59 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242022]
+2026-03-20 18:00:59 | DEBUG    | telegram.ext.ExtBot       | (Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='menu_consultation', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282196764261223', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 0, 44, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=22, offset=3, type=<MessageEntityType.BOLD>),), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=2, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_consultation', text='💼 Consultation'), InlineKeyboardButton(callback_data='menu_order', text='📋 Order Service')), (InlineKeyboardButton(callback_data='menu_faq', text='❓ FAQ'), InlineKeyboardButton(callback_data='menu_contacts', text='📬 Contacts')))), supergroup_chat_created=False, text='👋 Welcome to ServiceBot!\n\nWe provide professional digital services:\n• Web & mobile development\n• Business consulting\n• Technical support & maintenance\n\nChoose an option below to get started:')), update_id=541242022),)
+2026-03-20 18:00:59 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:00:59 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:00:59 | DEBUG    | telegram.ext.Application  | Processing update Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='menu_consultation', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282196764261223', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 0, 44, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=22, offset=3, type=<MessageEntityType.BOLD>),), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=2, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_consultation', text='💼 Consultation'), InlineKeyboardButton(callback_data='menu_order', text='📋 Order Service')), (InlineKeyboardButton(callback_data='menu_faq', text='❓ FAQ'), InlineKeyboardButton(callback_data='menu_contacts', text='📬 Contacts')))), supergroup_chat_created=False, text='👋 Welcome to ServiceBot!\n\nWe provide professional digital services:\n• Web & mobile development\n• Business consulting\n• Technical support & maintenance\n\nChoose an option below to get started:')), update_id=541242022)
+2026-03-20 18:00:59 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:00:59 | DEBUG    | telegram.ext.ExtBot       | Entering: answer_callback_query
+2026-03-20 18:01:02 | DEBUG    | telegram.ext.ExtBot       | True
+2026-03-20 18:01:02 | DEBUG    | telegram.ext.ExtBot       | Exiting: answer_callback_query
+2026-03-20 18:01:02 | DEBUG    | telegram.ext.ExtBot       | Entering: edit_message_text
+2026-03-20 18:01:02 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 0, 44, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 1, 1, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=21, offset=3, type=<MessageEntityType.BOLD>), MessageEntity(length=17, offset=70, type=<MessageEntityType.BOLD>), MessageEntity(length=15, offset=113, type=<MessageEntityType.BOLD>), MessageEntity(length=17, offset=154, type=<MessageEntityType.BOLD>), MessageEntity(length=11, offset=197, type=<MessageEntityType.BOLD>), MessageEntity(length=13, offset=298, type=<MessageEntityType.BOLD>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=2, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_back', text='🏠 Back to Menu'),),)), supergroup_chat_created=False, text='💼 Consultation Services\n\nOur experts are ready to help you with:\n\n🔹 Business Analysis — from $150 / session\n🔹 Technical Audit — from $200 / project\n🔹 Strategy Planning — from $300 / session\n🔹 Code Review — from $100 / hour\n\n📅 Sessions available Mon–Fri, 09:00–18:00 UTC\n\nReady to book? Press Order Service below.')
+2026-03-20 18:01:02 | DEBUG    | telegram.ext.ExtBot       | Exiting: edit_message_text
+2026-03-20 18:01:09 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242023]
+2026-03-20 18:01:09 | DEBUG    | telegram.ext.ExtBot       | (Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='menu_back', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282195544699500', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 0, 44, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 1, 1, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=21, offset=3, type=<MessageEntityType.BOLD>), MessageEntity(length=17, offset=70, type=<MessageEntityType.BOLD>), MessageEntity(length=15, offset=113, type=<MessageEntityType.BOLD>), MessageEntity(length=17, offset=154, type=<MessageEntityType.BOLD>), MessageEntity(length=11, offset=197, type=<MessageEntityType.BOLD>), MessageEntity(length=13, offset=298, type=<MessageEntityType.BOLD>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=2, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_back', text='🏠 Back to Menu'),),)), supergroup_chat_created=False, text='💼 Consultation Services\n\nOur experts are ready to help you with:\n\n🔹 Business Analysis — from $150 / session\n🔹 Technical Audit — from $200 / project\n🔹 Strategy Planning — from $300 / session\n🔹 Code Review — from $100 / hour\n\n📅 Sessions available Mon–Fri, 09:00–18:00 UTC\n\nReady to book? Press Order Service below.')), update_id=541242023),)
+2026-03-20 18:01:09 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:01:09 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:01:09 | DEBUG    | telegram.ext.Application  | Processing update Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='menu_back', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282195544699500', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 0, 44, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 1, 1, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=21, offset=3, type=<MessageEntityType.BOLD>), MessageEntity(length=17, offset=70, type=<MessageEntityType.BOLD>), MessageEntity(length=15, offset=113, type=<MessageEntityType.BOLD>), MessageEntity(length=17, offset=154, type=<MessageEntityType.BOLD>), MessageEntity(length=11, offset=197, type=<MessageEntityType.BOLD>), MessageEntity(length=13, offset=298, type=<MessageEntityType.BOLD>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=2, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_back', text='🏠 Back to Menu'),),)), supergroup_chat_created=False, text='💼 Consultation Services\n\nOur experts are ready to help you with:\n\n🔹 Business Analysis — from $150 / session\n🔹 Technical Audit — from $200 / project\n🔹 Strategy Planning — from $300 / session\n🔹 Code Review — from $100 / hour\n\n📅 Sessions available Mon–Fri, 09:00–18:00 UTC\n\nReady to book? Press Order Service below.')), update_id=541242023)
+2026-03-20 18:01:09 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:01:09 | DEBUG    | telegram.ext.ExtBot       | Entering: answer_callback_query
+2026-03-20 18:01:12 | DEBUG    | telegram.ext.ExtBot       | True
+2026-03-20 18:01:12 | DEBUG    | telegram.ext.ExtBot       | Exiting: answer_callback_query
+2026-03-20 18:01:12 | DEBUG    | telegram.ext.ExtBot       | Entering: edit_message_text
+2026-03-20 18:01:13 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 0, 44, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 1, 12, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=22, offset=3, type=<MessageEntityType.BOLD>),), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=2, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_consultation', text='💼 Consultation'), InlineKeyboardButton(callback_data='menu_order', text='📋 Order Service')), (InlineKeyboardButton(callback_data='menu_faq', text='❓ FAQ'), InlineKeyboardButton(callback_data='menu_contacts', text='📬 Contacts')))), supergroup_chat_created=False, text='👋 Welcome to ServiceBot!\n\nWe provide professional digital services:\n• Web & mobile development\n• Business consulting\n• Technical support & maintenance\n\nChoose an option below to get started:')
+2026-03-20 18:01:13 | DEBUG    | telegram.ext.ExtBot       | Exiting: edit_message_text
+2026-03-20 18:01:15 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242024]
+2026-03-20 18:01:15 | DEBUG    | telegram.ext.ExtBot       | (Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='menu_order', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282195720233114', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 0, 44, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 1, 12, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=22, offset=3, type=<MessageEntityType.BOLD>),), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=2, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_consultation', text='💼 Consultation'), InlineKeyboardButton(callback_data='menu_order', text='📋 Order Service')), (InlineKeyboardButton(callback_data='menu_faq', text='❓ FAQ'), InlineKeyboardButton(callback_data='menu_contacts', text='📬 Contacts')))), supergroup_chat_created=False, text='👋 Welcome to ServiceBot!\n\nWe provide professional digital services:\n• Web & mobile development\n• Business consulting\n• Technical support & maintenance\n\nChoose an option below to get started:')), update_id=541242024),)
+2026-03-20 18:01:15 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:01:15 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:01:15 | DEBUG    | telegram.ext.Application  | Processing update Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='menu_order', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282195720233114', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 0, 44, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 1, 12, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=22, offset=3, type=<MessageEntityType.BOLD>),), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=2, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_consultation', text='💼 Consultation'), InlineKeyboardButton(callback_data='menu_order', text='📋 Order Service')), (InlineKeyboardButton(callback_data='menu_faq', text='❓ FAQ'), InlineKeyboardButton(callback_data='menu_contacts', text='📬 Contacts')))), supergroup_chat_created=False, text='👋 Welcome to ServiceBot!\n\nWe provide professional digital services:\n• Web & mobile development\n• Business consulting\n• Technical support & maintenance\n\nChoose an option below to get started:')), update_id=541242024)
+2026-03-20 18:01:15 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:01:15 | DEBUG    | telegram.ext.ExtBot       | Entering: answer_callback_query
+2026-03-20 18:01:16 | DEBUG    | telegram.ext.ExtBot       | True
+2026-03-20 18:01:16 | DEBUG    | telegram.ext.ExtBot       | Exiting: answer_callback_query
+2026-03-20 18:01:16 | DEBUG    | telegram.ext.ExtBot       | Entering: edit_message_text
+2026-03-20 18:01:16 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 0, 44, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 1, 15, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=14, offset=3, type=<MessageEntityType.BOLD>), MessageEntity(length=7, offset=56, type=<MessageEntityType.BOT_COMMAND>), MessageEntity(length=15, offset=101, type=<MessageEntityType.BOLD>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=2, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='order_cancel', text='❌ Cancel Order'),),)), supergroup_chat_created=False, text="📋 New Order Form\n\nI'll ask you 4 quick questions.\nType /cancel at any time to abort.\n\nStep 1 of 4 — Your full name:")
+2026-03-20 18:01:16 | DEBUG    | telegram.ext.ExtBot       | Exiting: edit_message_text
+2026-03-20 18:01:22 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242025]
+2026-03-20 18:01:22 | DEBUG    | telegram.ext.ExtBot       | (Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 1, 21, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=3, supergroup_chat_created=False, text='fdfsdf'), update_id=541242025),)
+2026-03-20 18:01:22 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:01:22 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:01:22 | DEBUG    | telegram.ext.Application  | Processing update Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 1, 21, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=3, supergroup_chat_created=False, text='fdfsdf'), update_id=541242025)
+2026-03-20 18:01:22 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state 0
+2026-03-20 18:01:22 | DEBUG    | telegram.ext.ExtBot       | Entering: send_message
+2026-03-20 18:01:25 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 1, 23, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=19, offset=14, type=<MessageEntityType.BOLD>),), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=4, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='order_cancel', text='❌ Cancel Order'),),)), supergroup_chat_created=False, text='Step 2 of 4 — Your email address:')
+2026-03-20 18:01:25 | DEBUG    | telegram.ext.ExtBot       | Exiting: send_message
+2026-03-20 18:01:33 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:01:33 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:01:33 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:01:33 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:01:34 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242026]
+2026-03-20 18:01:34 | DEBUG    | telegram.ext.ExtBot       | (Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 1, 32, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=10, offset=0, type=<MessageEntityType.EMAIL>),), from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=5, supergroup_chat_created=False, text='99@mail.ru'), update_id=541242026),)
+2026-03-20 18:01:34 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:01:34 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:01:34 | DEBUG    | telegram.ext.Application  | Processing update Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 1, 32, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=10, offset=0, type=<MessageEntityType.EMAIL>),), from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=5, supergroup_chat_created=False, text='99@mail.ru'), update_id=541242026)
+2026-03-20 18:01:34 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state 1
+2026-03-20 18:01:34 | DEBUG    | telegram.ext.ExtBot       | Entering: send_message
+2026-03-20 18:01:38 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 1, 37, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=17, offset=14, type=<MessageEntityType.BOLD>), MessageEntity(length=12, offset=38, type=<MessageEntityType.PHONE_NUMBER>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=6, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='order_cancel', text='❌ Cancel Order'),),)), supergroup_chat_created=False, text='Step 3 of 4 — Your phone number (e.g. +12025550100):')
+2026-03-20 18:01:38 | DEBUG    | telegram.ext.ExtBot       | Exiting: send_message
+2026-03-20 18:01:45 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:01:45 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:01:45 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:01:45 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:01:45 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242027]
+2026-03-20 18:01:45 | DEBUG    | telegram.ext.ExtBot       | (Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 1, 44, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=12, offset=0, type=<MessageEntityType.PHONE_NUMBER>),), from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=7, supergroup_chat_created=False, text='+12025550100'), update_id=541242027),)
+2026-03-20 18:01:45 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:01:45 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:01:45 | DEBUG    | telegram.ext.Application  | Processing update Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 1, 44, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=12, offset=0, type=<MessageEntityType.PHONE_NUMBER>),), from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=7, supergroup_chat_created=False, text='+12025550100'), update_id=541242027)
+2026-03-20 18:01:45 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state 2
+2026-03-20 18:01:45 | DEBUG    | telegram.ext.ExtBot       | Entering: send_message
+2026-03-20 18:01:48 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 1, 47, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=18, offset=14, type=<MessageEntityType.BOLD>),), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=8, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='order_cancel', text='❌ Cancel Order'),),)), supergroup_chat_created=False, text='Step 4 of 4 — Describe your task (min 10 characters):')
+2026-03-20 18:01:48 | DEBUG    | telegram.ext.ExtBot       | Exiting: send_message
+2026-03-20 18:01:56 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:01:56 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:01:56 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:01:56 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:02:06 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:02:06 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:02:06 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:02:06 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:02:08 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242028]
+2026-03-20 18:02:08 | DEBUG    | telegram.ext.ExtBot       | (Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 2, 6, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=9, supergroup_chat_created=False, text='i have probloms'), update_id=541242028),)
+2026-03-20 18:02:08 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:02:08 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:02:08 | DEBUG    | telegram.ext.Application  | Processing update Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 2, 6, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=9, supergroup_chat_created=False, text='i have probloms'), update_id=541242028)
+2026-03-20 18:02:08 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state 3
+2026-03-20 18:02:08 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, '\n            INSERT INTO orders (user_id, name, email, phone, description)\n            VALUES (?, ?, ?, ?, ?)\n            ', (7422733657, 'fdfsdf', '99@mail.ru', '+12025550100', 'i have probloms'))
+2026-03-20 18:02:08 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, '\n            INSERT INTO orders (user_id, name, email, phone, description)\n            VALUES (?, ?, ?, ?, ?)\n            ', (7422733657, 'fdfsdf', '99@mail.ru', '+12025550100', 'i have probloms')) completed
+2026-03-20 18:02:08 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F32AAC0>)
+2026-03-20 18:02:08 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F32AAC0>) completed
+2026-03-20 18:02:08 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method commit of sqlite3.Connection object at 0x000001D90F2D93F0>)
+2026-03-20 18:02:08 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method commit of sqlite3.Connection object at 0x000001D90F2D93F0>) completed
+2026-03-20 18:02:08 | INFO     | database.db               | Order #1 created by user 7422733657
+2026-03-20 18:02:08 | DEBUG    | telegram.ext.ExtBot       | Entering: send_message
+2026-03-20 18:02:09 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 2, 8, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=29, offset=2, type=<MessageEntityType.BOLD>), MessageEntity(length=8, offset=36, type=<MessageEntityType.BOLD>), MessageEntity(length=10, offset=72, type=<MessageEntityType.EMAIL>), MessageEntity(length=12, offset=93, type=<MessageEntityType.PHONE_NUMBER>), MessageEntity(length=8, offset=165, type=<MessageEntityType.BOLD>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=10, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_back', text='🏠 Back to Menu'),),)), supergroup_chat_created=False, text='✅ Order submitted successfully!\n\n📌 Order #1\n\n👤 Name: fdfsdf\n📧 Email: 99@mail.ru\n📱 Phone: +12025550100\n📝 Task: i have probloms\n\nOur team will contact you within 24 hours. Thank you! 🙏')
+2026-03-20 18:02:09 | DEBUG    | telegram.ext.ExtBot       | Exiting: send_message
+2026-03-20 18:02:09 | DEBUG    | telegram.ext.ExtBot       | Entering: send_message
+2026-03-20 18:02:09 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 2, 8, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=12, offset=3, type=<MessageEntityType.BOLD>), MessageEntity(length=5, offset=20, type=<MessageEntityType.BOLD>), MessageEntity(length=10, offset=33, type=<MessageEntityType.CODE>), MessageEntity(length=5, offset=48, type=<MessageEntityType.BOLD>), MessageEntity(length=6, offset=64, type=<MessageEntityType.BOLD>), MessageEntity(length=10, offset=71, type=<MessageEntityType.EMAIL>), MessageEntity(length=6, offset=85, type=<MessageEntityType.BOLD>), MessageEntity(length=12, offset=92, type=<MessageEntityType.PHONE_NUMBER>), MessageEntity(length=5, offset=108, type=<MessageEntityType.BOLD>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=11, supergroup_chat_created=False, text='🔔 New Order #1\n\n👤 User: Данил (7422733657)\n📛 Name: fdfsdf\n📧 Email: 99@mail.ru\n📱 Phone: +12025550100\n📝 Task: i have probloms')
+2026-03-20 18:02:09 | DEBUG    | telegram.ext.ExtBot       | Exiting: send_message
+2026-03-20 18:02:09 | INFO     | handlers.user             | Order #1 submitted by user 7422733657
+2026-03-20 18:02:18 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242029]
+2026-03-20 18:02:18 | DEBUG    | telegram.ext.ExtBot       | (Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='menu_back', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282193904246920', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 2, 8, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=29, offset=2, type=<MessageEntityType.BOLD>), MessageEntity(length=8, offset=36, type=<MessageEntityType.BOLD>), MessageEntity(length=10, offset=72, type=<MessageEntityType.EMAIL>), MessageEntity(length=12, offset=93, type=<MessageEntityType.PHONE_NUMBER>), MessageEntity(length=8, offset=165, type=<MessageEntityType.BOLD>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=10, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_back', text='🏠 Back to Menu'),),)), supergroup_chat_created=False, text='✅ Order submitted successfully!\n\n📌 Order #1\n\n👤 Name: fdfsdf\n📧 Email: 99@mail.ru\n📱 Phone: +12025550100\n📝 Task: i have probloms\n\nOur team will contact you within 24 hours. Thank you! 🙏')), update_id=541242029),)
+2026-03-20 18:02:18 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:02:18 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:02:18 | DEBUG    | telegram.ext.Application  | Processing update Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='menu_back', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282193904246920', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 2, 8, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=29, offset=2, type=<MessageEntityType.BOLD>), MessageEntity(length=8, offset=36, type=<MessageEntityType.BOLD>), MessageEntity(length=10, offset=72, type=<MessageEntityType.EMAIL>), MessageEntity(length=12, offset=93, type=<MessageEntityType.PHONE_NUMBER>), MessageEntity(length=8, offset=165, type=<MessageEntityType.BOLD>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=10, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_back', text='🏠 Back to Menu'),),)), supergroup_chat_created=False, text='✅ Order submitted successfully!\n\n📌 Order #1\n\n👤 Name: fdfsdf\n📧 Email: 99@mail.ru\n📱 Phone: +12025550100\n📝 Task: i have probloms\n\nOur team will contact you within 24 hours. Thank you! 🙏')), update_id=541242029)
+2026-03-20 18:02:18 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:02:18 | DEBUG    | telegram.ext.ExtBot       | Entering: answer_callback_query
+2026-03-20 18:02:19 | DEBUG    | telegram.ext.ExtBot       | True
+2026-03-20 18:02:19 | DEBUG    | telegram.ext.ExtBot       | Exiting: answer_callback_query
+2026-03-20 18:02:19 | DEBUG    | telegram.ext.ExtBot       | Entering: edit_message_text
+2026-03-20 18:02:19 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 2, 8, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 2, 18, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=22, offset=3, type=<MessageEntityType.BOLD>),), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=10, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_consultation', text='💼 Consultation'), InlineKeyboardButton(callback_data='menu_order', text='📋 Order Service')), (InlineKeyboardButton(callback_data='menu_faq', text='❓ FAQ'), InlineKeyboardButton(callback_data='menu_contacts', text='📬 Contacts')))), supergroup_chat_created=False, text='👋 Welcome to ServiceBot!\n\nWe provide professional digital services:\n• Web & mobile development\n• Business consulting\n• Technical support & maintenance\n\nChoose an option below to get started:')
+2026-03-20 18:02:19 | DEBUG    | telegram.ext.ExtBot       | Exiting: edit_message_text
+2026-03-20 18:02:21 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242030]
+2026-03-20 18:02:21 | DEBUG    | telegram.ext.ExtBot       | (Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='menu_contacts', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282194211900753', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 2, 8, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 2, 18, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=22, offset=3, type=<MessageEntityType.BOLD>),), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=10, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_consultation', text='💼 Consultation'), InlineKeyboardButton(callback_data='menu_order', text='📋 Order Service')), (InlineKeyboardButton(callback_data='menu_faq', text='❓ FAQ'), InlineKeyboardButton(callback_data='menu_contacts', text='📬 Contacts')))), supergroup_chat_created=False, text='👋 Welcome to ServiceBot!\n\nWe provide professional digital services:\n• Web & mobile development\n• Business consulting\n• Technical support & maintenance\n\nChoose an option below to get started:')), update_id=541242030),)
+2026-03-20 18:02:21 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:02:21 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:02:21 | DEBUG    | telegram.ext.Application  | Processing update Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='menu_contacts', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282194211900753', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 2, 8, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 2, 18, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=22, offset=3, type=<MessageEntityType.BOLD>),), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=10, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_consultation', text='💼 Consultation'), InlineKeyboardButton(callback_data='menu_order', text='📋 Order Service')), (InlineKeyboardButton(callback_data='menu_faq', text='❓ FAQ'), InlineKeyboardButton(callback_data='menu_contacts', text='📬 Contacts')))), supergroup_chat_created=False, text='👋 Welcome to ServiceBot!\n\nWe provide professional digital services:\n• Web & mobile development\n• Business consulting\n• Technical support & maintenance\n\nChoose an option below to get started:')), update_id=541242030)
+2026-03-20 18:02:21 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:02:21 | DEBUG    | telegram.ext.ExtBot       | Entering: answer_callback_query
+2026-03-20 18:02:22 | DEBUG    | telegram.ext.ExtBot       | True
+2026-03-20 18:02:22 | DEBUG    | telegram.ext.ExtBot       | Exiting: answer_callback_query
+2026-03-20 18:02:22 | DEBUG    | telegram.ext.ExtBot       | Entering: edit_message_text
+2026-03-20 18:02:22 | DEBUG    | telegram.ext.ExtBot       | Message(api_kwargs={'link_preview_options': {'url': 'https://servicebot.io/'}}, channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 2, 8, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 2, 21, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=10, offset=3, type=<MessageEntityType.BOLD>), MessageEntity(length=6, offset=18, type=<MessageEntityType.BOLD>), MessageEntity(length=21, offset=25, type=<MessageEntityType.EMAIL>), MessageEntity(length=9, offset=50, type=<MessageEntityType.BOLD>), MessageEntity(length=18, offset=60, type=<MessageEntityType.MENTION>), MessageEntity(length=9, offset=82, type=<MessageEntityType.BOLD>), MessageEntity(length=8, offset=113, type=<MessageEntityType.BOLD>), MessageEntity(length=21, offset=122, type=<MessageEntityType.URL>), MessageEntity(length=14, offset=148, type=<MessageEntityType.BOLD>), MessageEntity(length=16, offset=217, type=<MessageEntityType.BOLD>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=10, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='menu_back', text='🏠 Back to Menu'),),)), supergroup_chat_created=False, text='📬 Contact Us\n\n📧 Email: support@servicebot.io\n💬 Telegram: @ServiceBotSupport\n📱 WhatsApp: +1 (555) 000-1234\n🌐 Website: https://servicebot.io\n\n🕐 Working hours: Mon–Fri, 09:00–18:00 UTC\n\nWe typically respond within 2 business hours.')
+2026-03-20 18:02:22 | DEBUG    | telegram.ext.ExtBot       | Exiting: edit_message_text
+2026-03-20 18:02:31 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:02:31 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:02:31 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:02:31 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:02:42 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:02:42 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:02:42 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:02:42 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:02:52 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:02:52 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:02:52 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:02:52 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:02:58 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242031]
+2026-03-20 18:02:58 | DEBUG    | telegram.ext.ExtBot       | (Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 2, 57, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=3, offset=0, type=<MessageEntityType.BOT_COMMAND>),), from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=12, supergroup_chat_created=False, text='/ad'), update_id=541242031),)
+2026-03-20 18:02:58 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:02:58 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:02:58 | DEBUG    | telegram.ext.Application  | Processing update Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 2, 57, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=3, offset=0, type=<MessageEntityType.BOT_COMMAND>),), from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=12, supergroup_chat_created=False, text='/ad'), update_id=541242031)
+2026-03-20 18:02:58 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:02:58 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:02:58 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:04 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242032]
+2026-03-20 18:03:04 | DEBUG    | telegram.ext.ExtBot       | (Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 3, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=6, offset=0, type=<MessageEntityType.BOT_COMMAND>),), from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=13, supergroup_chat_created=False, text='/admin'), update_id=541242032),)
+2026-03-20 18:03:04 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:03:04 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:03:04 | DEBUG    | telegram.ext.Application  | Processing update Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 3, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=6, offset=0, type=<MessageEntityType.BOT_COMMAND>),), from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=13, supergroup_chat_created=False, text='/admin'), update_id=541242032)
+2026-03-20 18:03:04 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:04 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:04 | INFO     | handlers.admin            | User 7422733657 (danil14055) entered /admin
+2026-03-20 18:03:04 | DEBUG    | telegram.ext.ExtBot       | Entering: send_message
+2026-03-20 18:03:06 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 5, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=11, offset=3, type=<MessageEntityType.BOLD>),), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=14, supergroup_chat_created=False, text='🔐 Admin Panel\n\nEnter the admin password:')
+2026-03-20 18:03:06 | DEBUG    | telegram.ext.ExtBot       | Exiting: send_message
+2026-03-20 18:03:15 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:03:15 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:03:15 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:03:15 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:03:18 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242033]
+2026-03-20 18:03:18 | DEBUG    | telegram.ext.ExtBot       | (Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 17, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=15, supergroup_chat_created=False, text='admin2024secure'), update_id=541242033),)
+2026-03-20 18:03:18 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:03:18 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:03:18 | DEBUG    | telegram.ext.Application  | Processing update Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 17, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=15, supergroup_chat_created=False, text='admin2024secure'), update_id=541242033)
+2026-03-20 18:03:18 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:18 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state 10
+2026-03-20 18:03:18 | DEBUG    | telegram.ext.ExtBot       | Entering: delete_message
+2026-03-20 18:03:19 | DEBUG    | telegram.ext.ExtBot       | True
+2026-03-20 18:03:19 | DEBUG    | telegram.ext.ExtBot       | Exiting: delete_message
+2026-03-20 18:03:19 | INFO     | handlers.admin            | Admin login SUCCESS by user 7422733657 (danil14055)
+2026-03-20 18:03:19 | DEBUG    | telegram.ext.ExtBot       | Entering: send_message
+2026-03-20 18:03:19 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 18, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=16, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_orders_0', text='📋 All Orders'), InlineKeyboardButton(callback_data='admin_stats', text='📊 Statistics')), (InlineKeyboardButton(callback_data='admin_export', text='📤 Export CSV'), InlineKeyboardButton(callback_data='admin_broadcast', text='📣 Broadcast')), (InlineKeyboardButton(callback_data='admin_logout', text='🚪 Logout'),))), supergroup_chat_created=False, text='✅ Access granted. Welcome, Admin!\n\nChoose an action:')
+2026-03-20 18:03:19 | DEBUG    | telegram.ext.ExtBot       | Exiting: send_message
+2026-03-20 18:03:27 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242034]
+2026-03-20 18:03:27 | DEBUG    | telegram.ext.ExtBot       | (Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='admin_orders_0', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282193353832788', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 18, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=16, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_orders_0', text='📋 All Orders'), InlineKeyboardButton(callback_data='admin_stats', text='📊 Statistics')), (InlineKeyboardButton(callback_data='admin_export', text='📤 Export CSV'), InlineKeyboardButton(callback_data='admin_broadcast', text='📣 Broadcast')), (InlineKeyboardButton(callback_data='admin_logout', text='🚪 Logout'),))), supergroup_chat_created=False, text='✅ Access granted. Welcome, Admin!\n\nChoose an action:')), update_id=541242034),)
+2026-03-20 18:03:27 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:03:27 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:03:27 | DEBUG    | telegram.ext.Application  | Processing update Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='admin_orders_0', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282193353832788', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 18, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=16, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_orders_0', text='📋 All Orders'), InlineKeyboardButton(callback_data='admin_stats', text='📊 Statistics')), (InlineKeyboardButton(callback_data='admin_export', text='📤 Export CSV'), InlineKeyboardButton(callback_data='admin_broadcast', text='📣 Broadcast')), (InlineKeyboardButton(callback_data='admin_logout', text='🚪 Logout'),))), supergroup_chat_created=False, text='✅ Access granted. Welcome, Admin!\n\nChoose an action:')), update_id=541242034)
+2026-03-20 18:03:27 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:27 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:27 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:27 | DEBUG    | telegram.ext.ExtBot       | Entering: answer_callback_query
+2026-03-20 18:03:32 | ERROR    | ErrorHandler              | Unhandled exception:
+Traceback (most recent call last):
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpx\_transports\default.py", line 66, in map_httpcore_exceptions
+    yield
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpx\_transports\default.py", line 366, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpcore\_async\http_proxy.py", line 316, in handle_async_request
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpcore\_async\http11.py", line 376, in start_tls
+    return await self._stream.start_tls(ssl_context, server_hostname, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+  File "C:\Users\fffgg\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\request\_httpxrequest.py", line 268, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpx\_client.py", line 1530, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpx\_client.py", line 1617, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpx\_client.py", line 1645, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpx\_client.py", line 1682, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpx\_client.py", line 1719, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpx\_transports\default.py", line 365, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Users\fffgg\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\httpx\_transports\default.py", line 83, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\ext\_application.py", line 1234, in process_update
+    await coroutine
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\ext\_basehandler.py", line 157, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\handlers\admin.py", line 259, in admin_orders
+    await query.answer()
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\_callbackquery.py", line 180, in answer
+    return await self.get_bot().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\ext\_extbot.py", line 778, in answer_callback_query
+    return await super().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\_bot.py", line 525, in decorator
+    result = await func(self, *args, **kwargs)  # skipcq: PYL-E1102
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\_bot.py", line 3213, in answer_callback_query
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\_bot.py", line 613, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\ext\_extbot.py", line 340, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\_bot.py", line 641, in _do_post
+    return await request.post(
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\request\_baserequest.py", line 200, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\request\_baserequest.py", line 340, in _request_wrapper
+    raise exc
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\request\_baserequest.py", line 330, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fffgg\OneDrive\Рабочий стол\freelance\unpacking-tg-bot-eng\venv\Lib\site-packages\telegram\request\_httpxrequest.py", line 285, in do_request
+    raise TimedOut from err
+telegram.error.TimedOut: Timed out
+2026-03-20 18:03:32 | DEBUG    | telegram.ext.ExtBot       | Entering: send_message
+2026-03-20 18:03:35 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 34, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=17, supergroup_chat_created=False, text='⚠️ An unexpected error occurred. Please try again later.\nIf the problem persists, contact support.')
+2026-03-20 18:03:35 | DEBUG    | telegram.ext.ExtBot       | Exiting: send_message
+2026-03-20 18:03:35 | DEBUG    | telegram.ext.ExtBot       | Entering: send_message
+2026-03-20 18:03:35 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 34, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=9, offset=3, type=<MessageEntityType.BOLD>), MessageEntity(length=6, offset=14, type=<MessageEntityType.BOLD>), MessageEntity(length=19, offset=21, type=<MessageEntityType.CODE>), MessageEntity(length=5, offset=41, type=<MessageEntityType.BOLD>), MessageEntity(length=10, offset=54, type=<MessageEntityType.CODE>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=18, supergroup_chat_created=False, text='🚨 Bot Error\n\nError: TimedOut: Timed out\nUser: Данил (7422733657)')
+2026-03-20 18:03:35 | DEBUG    | telegram.ext.ExtBot       | Exiting: send_message
+2026-03-20 18:03:38 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:03:38 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:03:38 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:03:38 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:03:42 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242035]
+2026-03-20 18:03:42 | DEBUG    | telegram.ext.ExtBot       | (Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='admin_stats', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282194209940539', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 18, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=16, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_orders_0', text='📋 All Orders'), InlineKeyboardButton(callback_data='admin_stats', text='📊 Statistics')), (InlineKeyboardButton(callback_data='admin_export', text='📤 Export CSV'), InlineKeyboardButton(callback_data='admin_broadcast', text='📣 Broadcast')), (InlineKeyboardButton(callback_data='admin_logout', text='🚪 Logout'),))), supergroup_chat_created=False, text='✅ Access granted. Welcome, Admin!\n\nChoose an action:')), update_id=541242035),)
+2026-03-20 18:03:42 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:03:42 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:03:42 | DEBUG    | telegram.ext.Application  | Processing update Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='admin_stats', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282194209940539', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 18, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=16, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_orders_0', text='📋 All Orders'), InlineKeyboardButton(callback_data='admin_stats', text='📊 Statistics')), (InlineKeyboardButton(callback_data='admin_export', text='📤 Export CSV'), InlineKeyboardButton(callback_data='admin_broadcast', text='📣 Broadcast')), (InlineKeyboardButton(callback_data='admin_logout', text='🚪 Logout'),))), supergroup_chat_created=False, text='✅ Access granted. Welcome, Admin!\n\nChoose an action:')), update_id=541242035)
+2026-03-20 18:03:42 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:42 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:42 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:42 | DEBUG    | telegram.ext.ExtBot       | Entering: answer_callback_query
+2026-03-20 18:03:45 | DEBUG    | telegram.ext.ExtBot       | True
+2026-03-20 18:03:45 | DEBUG    | telegram.ext.ExtBot       | Exiting: answer_callback_query
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT COUNT(*) FROM users', [])
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT COUNT(*) FROM users', []) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method fetchone of sqlite3.Cursor object at 0x000001D90F3287C0>)
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method fetchone of sqlite3.Cursor object at 0x000001D90F3287C0>) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F3287C0>)
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F3287C0>) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT COUNT(*) FROM orders WHERE created_at >= ?', ('2026-03-19 15:03:45.198857',))
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT COUNT(*) FROM orders WHERE created_at >= ?', ('2026-03-19 15:03:45.198857',)) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method fetchone of sqlite3.Cursor object at 0x000001D90F3287C0>)
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method fetchone of sqlite3.Cursor object at 0x000001D90F3287C0>) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F3287C0>)
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F3287C0>) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT COUNT(*) FROM orders WHERE created_at >= ?', ('2026-03-13 15:03:45.200436',))
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT COUNT(*) FROM orders WHERE created_at >= ?', ('2026-03-13 15:03:45.200436',)) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method fetchone of sqlite3.Cursor object at 0x000001D90F3287C0>)
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method fetchone of sqlite3.Cursor object at 0x000001D90F3287C0>) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F3287C0>)
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F3287C0>) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT COUNT(*) FROM orders WHERE created_at >= ?', ('2026-02-18 15:03:45.202015',))
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT COUNT(*) FROM orders WHERE created_at >= ?', ('2026-02-18 15:03:45.202015',)) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method fetchone of sqlite3.Cursor object at 0x000001D90F3287C0>)
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method fetchone of sqlite3.Cursor object at 0x000001D90F3287C0>) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F3287C0>)
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F3287C0>) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT COUNT(*) FROM orders', [])
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT COUNT(*) FROM orders', []) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method fetchone of sqlite3.Cursor object at 0x000001D90F3287C0>)
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method fetchone of sqlite3.Cursor object at 0x000001D90F3287C0>) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F3287C0>)
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F3287C0>) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT * FROM orders ORDER BY created_at DESC LIMIT ?', (3,))
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT * FROM orders ORDER BY created_at DESC LIMIT ?', (3,)) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x000001D90F3287C0>)
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x000001D90F3287C0>) completed
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F3287C0>)
+2026-03-20 18:03:45 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D90F3287C0>) completed
+2026-03-20 18:03:45 | DEBUG    | telegram.ext.ExtBot       | Entering: edit_message_text
+2026-03-20 18:03:46 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 18, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 3, 44, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=14, offset=3, type=<MessageEntityType.BOLD>), MessageEntity(length=29, offset=18, type=<MessageEntityType.ITALIC>), MessageEntity(length=5, offset=52, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=78, type=<MessageEntityType.BOLD>), MessageEntity(length=6, offset=84, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=107, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=125, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=143, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=161, type=<MessageEntityType.BOLD>), MessageEntity(length=16, offset=167, type=<MessageEntityType.BOLD>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=16, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_stats', text='🔄 Refresh'),), (InlineKeyboardButton(callback_data='admin_back', text='🔙 Admin Menu'),))), supergroup_chat_created=False, text='📊 Bot Statistics\nUpdated: 2026-03-20 15:03 UTC\n\n👥 Users\n  Total registered: 1\n\n📋 Orders\n  Today (24 h): 1\n  This week   : 1\n  This month  : 1\n  All time    : 1\n\n🕐 Latest 3 orders:\n  • #1 fdfsdf (2026-03-20)')
+2026-03-20 18:03:46 | DEBUG    | telegram.ext.ExtBot       | Exiting: edit_message_text
+2026-03-20 18:03:51 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242036]
+2026-03-20 18:03:51 | DEBUG    | telegram.ext.ExtBot       | (Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='admin_back', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282196088570034', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 18, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 3, 44, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=14, offset=3, type=<MessageEntityType.BOLD>), MessageEntity(length=29, offset=18, type=<MessageEntityType.ITALIC>), MessageEntity(length=5, offset=52, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=78, type=<MessageEntityType.BOLD>), MessageEntity(length=6, offset=84, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=107, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=125, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=143, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=161, type=<MessageEntityType.BOLD>), MessageEntity(length=16, offset=167, type=<MessageEntityType.BOLD>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=16, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_stats', text='🔄 Refresh'),), (InlineKeyboardButton(callback_data='admin_back', text='🔙 Admin Menu'),))), supergroup_chat_created=False, text='📊 Bot Statistics\nUpdated: 2026-03-20 15:03 UTC\n\n👥 Users\n  Total registered: 1\n\n📋 Orders\n  Today (24 h): 1\n  This week   : 1\n  This month  : 1\n  All time    : 1\n\n🕐 Latest 3 orders:\n  • #1 fdfsdf (2026-03-20)')), update_id=541242036),)
+2026-03-20 18:03:51 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:03:51 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:03:51 | DEBUG    | telegram.ext.Application  | Processing update Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='admin_back', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282196088570034', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 18, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 3, 44, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=14, offset=3, type=<MessageEntityType.BOLD>), MessageEntity(length=29, offset=18, type=<MessageEntityType.ITALIC>), MessageEntity(length=5, offset=52, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=78, type=<MessageEntityType.BOLD>), MessageEntity(length=6, offset=84, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=107, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=125, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=143, type=<MessageEntityType.BOLD>), MessageEntity(length=1, offset=161, type=<MessageEntityType.BOLD>), MessageEntity(length=16, offset=167, type=<MessageEntityType.BOLD>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=16, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_stats', text='🔄 Refresh'),), (InlineKeyboardButton(callback_data='admin_back', text='🔙 Admin Menu'),))), supergroup_chat_created=False, text='📊 Bot Statistics\nUpdated: 2026-03-20 15:03 UTC\n\n👥 Users\n  Total registered: 1\n\n📋 Orders\n  Today (24 h): 1\n  This week   : 1\n  This month  : 1\n  All time    : 1\n\n🕐 Latest 3 orders:\n  • #1 fdfsdf (2026-03-20)')), update_id=541242036)
+2026-03-20 18:03:51 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:51 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:51 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:51 | DEBUG    | telegram.ext.ExtBot       | Entering: answer_callback_query
+2026-03-20 18:03:53 | DEBUG    | telegram.ext.ExtBot       | True
+2026-03-20 18:03:53 | DEBUG    | telegram.ext.ExtBot       | Exiting: answer_callback_query
+2026-03-20 18:03:53 | DEBUG    | telegram.ext.ExtBot       | Entering: edit_message_text
+2026-03-20 18:03:54 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 18, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 3, 53, tzinfo=datetime.timezone.utc), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=16, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_orders_0', text='📋 All Orders'), InlineKeyboardButton(callback_data='admin_stats', text='📊 Statistics')), (InlineKeyboardButton(callback_data='admin_export', text='📤 Export CSV'), InlineKeyboardButton(callback_data='admin_broadcast', text='📣 Broadcast')), (InlineKeyboardButton(callback_data='admin_logout', text='🚪 Logout'),))), supergroup_chat_created=False, text='✅ Access granted. Welcome, Admin!\n\nChoose an action:')
+2026-03-20 18:03:54 | DEBUG    | telegram.ext.ExtBot       | Exiting: edit_message_text
+2026-03-20 18:03:57 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242037]
+2026-03-20 18:03:57 | DEBUG    | telegram.ext.ExtBot       | (Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='admin_broadcast', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282195423820537', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 18, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 3, 53, tzinfo=datetime.timezone.utc), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=16, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_orders_0', text='📋 All Orders'), InlineKeyboardButton(callback_data='admin_stats', text='📊 Statistics')), (InlineKeyboardButton(callback_data='admin_export', text='📤 Export CSV'), InlineKeyboardButton(callback_data='admin_broadcast', text='📣 Broadcast')), (InlineKeyboardButton(callback_data='admin_logout', text='🚪 Logout'),))), supergroup_chat_created=False, text='✅ Access granted. Welcome, Admin!\n\nChoose an action:')), update_id=541242037),)
+2026-03-20 18:03:57 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:03:57 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:03:57 | DEBUG    | telegram.ext.Application  | Processing update Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='admin_broadcast', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282195423820537', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 18, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 3, 53, tzinfo=datetime.timezone.utc), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=16, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_orders_0', text='📋 All Orders'), InlineKeyboardButton(callback_data='admin_stats', text='📊 Statistics')), (InlineKeyboardButton(callback_data='admin_export', text='📤 Export CSV'), InlineKeyboardButton(callback_data='admin_broadcast', text='📣 Broadcast')), (InlineKeyboardButton(callback_data='admin_logout', text='🚪 Logout'),))), supergroup_chat_created=False, text='✅ Access granted. Welcome, Admin!\n\nChoose an action:')), update_id=541242037)
+2026-03-20 18:03:57 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:57 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:57 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:03:57 | DEBUG    | telegram.ext.ExtBot       | Entering: answer_callback_query
+2026-03-20 18:03:58 | DEBUG    | telegram.ext.ExtBot       | True
+2026-03-20 18:03:58 | DEBUG    | telegram.ext.ExtBot       | Exiting: answer_callback_query
+2026-03-20 18:03:58 | DEBUG    | telegram.ext.ExtBot       | Entering: edit_message_text
+2026-03-20 18:03:58 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 3, 18, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 3, 57, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=17, offset=3, type=<MessageEntityType.BOLD>), MessageEntity(length=7, offset=111, type=<MessageEntityType.BOT_COMMAND>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=16, supergroup_chat_created=False, text='📣 Broadcast Message\n\nSend the message you want to broadcast to all users.\nHTML formatting is supported.\n\nType /cancel to abort.')
+2026-03-20 18:03:58 | DEBUG    | telegram.ext.ExtBot       | Exiting: edit_message_text
+2026-03-20 18:04:06 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242038]
+2026-03-20 18:04:06 | DEBUG    | telegram.ext.ExtBot       | (Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 4, 5, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=7, offset=0, type=<MessageEntityType.BOT_COMMAND>),), from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=19, supergroup_chat_created=False, text='/cancel'), update_id=541242038),)
+2026-03-20 18:04:06 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:04:06 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:04:06 | DEBUG    | telegram.ext.Application  | Processing update Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 4, 5, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=7, offset=0, type=<MessageEntityType.BOT_COMMAND>),), from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), group_chat_created=False, message_id=19, supergroup_chat_created=False, text='/cancel'), update_id=541242038)
+2026-03-20 18:04:06 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:04:06 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:04:06 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state 11
+2026-03-20 18:04:06 | DEBUG    | telegram.ext.ExtBot       | Entering: send_message
+2026-03-20 18:04:08 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 4, 7, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=20, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_orders_0', text='📋 All Orders'), InlineKeyboardButton(callback_data='admin_stats', text='📊 Statistics')), (InlineKeyboardButton(callback_data='admin_export', text='📤 Export CSV'), InlineKeyboardButton(callback_data='admin_broadcast', text='📣 Broadcast')), (InlineKeyboardButton(callback_data='admin_logout', text='🚪 Logout'),))), supergroup_chat_created=False, text='❌ Action cancelled.')
+2026-03-20 18:04:08 | DEBUG    | telegram.ext.ExtBot       | Exiting: send_message
+2026-03-20 18:04:11 | DEBUG    | telegram.ext.ExtBot       | Getting updates: [541242039]
+2026-03-20 18:04:11 | DEBUG    | telegram.ext.ExtBot       | (Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='admin_orders_0', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282196938652021', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 4, 7, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=20, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_orders_0', text='📋 All Orders'), InlineKeyboardButton(callback_data='admin_stats', text='📊 Statistics')), (InlineKeyboardButton(callback_data='admin_export', text='📤 Export CSV'), InlineKeyboardButton(callback_data='admin_broadcast', text='📣 Broadcast')), (InlineKeyboardButton(callback_data='admin_logout', text='🚪 Logout'),))), supergroup_chat_created=False, text='❌ Action cancelled.')), update_id=541242039),)
+2026-03-20 18:04:11 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:04:11 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:04:11 | DEBUG    | telegram.ext.Application  | Processing update Update(callback_query=CallbackQuery(chat_instance='-1890682328841329541', data='admin_orders_0', from_user=User(first_name='Данил', id=7422733657, is_bot=False, language_code='ru', username='danil14055'), id='4210282196938652021', message=Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 4, 7, tzinfo=datetime.timezone.utc), delete_chat_photo=False, from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=20, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='admin_orders_0', text='📋 All Orders'), InlineKeyboardButton(callback_data='admin_stats', text='📊 Statistics')), (InlineKeyboardButton(callback_data='admin_export', text='📤 Export CSV'), InlineKeyboardButton(callback_data='admin_broadcast', text='📣 Broadcast')), (InlineKeyboardButton(callback_data='admin_logout', text='🚪 Logout'),))), supergroup_chat_created=False, text='❌ Action cancelled.')), update_id=541242039)
+2026-03-20 18:04:11 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:04:11 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:04:11 | DEBUG    | telegram.ext.ConversationHandler | Selecting conversation (7422733657, 7422733657) with state None
+2026-03-20 18:04:11 | DEBUG    | telegram.ext.ExtBot       | Entering: answer_callback_query
+2026-03-20 18:04:12 | DEBUG    | telegram.ext.ExtBot       | True
+2026-03-20 18:04:12 | DEBUG    | telegram.ext.ExtBot       | Exiting: answer_callback_query
+2026-03-20 18:04:12 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT * FROM orders ORDER BY created_at DESC', [])
+2026-03-20 18:04:12 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method execute of sqlite3.Connection object at 0x000001D90F2D93F0>, 'SELECT * FROM orders ORDER BY created_at DESC', []) completed
+2026-03-20 18:04:12 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x000001D9104A35C0>)
+2026-03-20 18:04:12 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x000001D9104A35C0>) completed
+2026-03-20 18:04:12 | DEBUG    | aiosqlite                 | executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D9104A35C0>)
+2026-03-20 18:04:12 | DEBUG    | aiosqlite                 | operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x000001D9104A35C0>) completed
+2026-03-20 18:04:12 | DEBUG    | telegram.ext.ExtBot       | Entering: edit_message_text
+2026-03-20 18:04:12 | DEBUG    | telegram.ext.ExtBot       | Message(channel_chat_created=False, chat=Chat(first_name='Данил', id=7422733657, type=<ChatType.PRIVATE>, username='danil14055'), date=datetime.datetime(2026, 3, 20, 15, 4, 7, tzinfo=datetime.timezone.utc), delete_chat_photo=False, edit_date=datetime.datetime(2026, 3, 20, 15, 4, 11, tzinfo=datetime.timezone.utc), entities=(MessageEntity(length=27, offset=3, type=<MessageEntityType.BOLD>), MessageEntity(length=2, offset=53, type=<MessageEntityType.BOLD>), MessageEntity(length=10, offset=75, type=<MessageEntityType.EMAIL>), MessageEntity(length=12, offset=89, type=<MessageEntityType.PHONE_NUMBER>)), from_user=User(first_name='My Service Bot', id=8591411527, is_bot=True, username='my7service14_bot'), group_chat_created=False, message_id=20, reply_markup=InlineKeyboardMarkup(inline_keyboard=((InlineKeyboardButton(callback_data='noop', text='· 1/1 ·'),), (InlineKeyboardButton(callback_data='admin_back', text='🔙 Admin Menu'),))), supergroup_chat_created=False, text='📋 Orders (1 total) — Page 1/1\n\n━━━━━━━━━━━━━━━━━\n🆔 #1 | NEW\n👤 fdfsdf\n📧 99@mail.ru\n📱 +12025550100\n📝 i have probloms\n🕐 2026-03-20 15:02')
+2026-03-20 18:04:12 | DEBUG    | telegram.ext.ExtBot       | Exiting: edit_message_text
+2026-03-20 18:04:22 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:04:22 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:04:22 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:04:22 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:04:32 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:04:32 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:04:32 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:04:32 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:04:43 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:04:43 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:04:43 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:04:43 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:04:54 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:04:54 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:04:54 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:04:54 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:05:04 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:05:04 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:05:04 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:05:04 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:05:14 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:05:14 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:05:14 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:05:14 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:05:25 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:05:25 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:05:25 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:05:25 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:05:35 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:05:35 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:05:35 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:05:35 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:05:45 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:05:45 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:05:45 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:05:45 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:05:56 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:05:56 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:05:56 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:05:56 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:06:06 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:06:06 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:06:06 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:06:06 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:06:16 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:06:16 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:06:16 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:06:16 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:06:26 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:06:26 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:06:26 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:06:26 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:06:37 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:06:37 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:06:37 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:06:37 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:06:47 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:06:47 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:06:47 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:06:47 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:06:57 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:06:57 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:06:57 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:06:57 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:07:08 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:07:08 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:07:08 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:07:08 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:07:18 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:07:18 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:07:18 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:07:18 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:07:28 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:07:28 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:07:28 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:07:28 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:07:38 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:07:38 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:07:38 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:07:38 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:07:49 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:07:49 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:07:49 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:07:49 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:07:59 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:07:59 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:07:59 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:07:59 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:08:09 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:08:09 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:08:09 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:08:09 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:08:20 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:08:20 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:08:20 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:08:20 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:08:30 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:08:30 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:08:30 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:08:30 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:08:40 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:08:40 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:08:40 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:08:40 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:08:50 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:08:50 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:08:50 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:08:50 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:09:01 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:09:01 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:09:01 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:09:01 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:09:11 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:09:11 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:09:11 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:09:11 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:09:21 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:09:21 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:09:21 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:09:21 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:09:31 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:09:31 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:09:31 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:09:31 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:09:42 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:09:42 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:09:42 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:09:42 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:09:52 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:09:52 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:09:52 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:09:52 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:10:02 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:10:02 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:10:02 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:10:02 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:10:13 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:10:13 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:10:13 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:10:13 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:10:23 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:10:23 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:10:23 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:10:23 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:10:33 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:10:33 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:10:33 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:10:33 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:10:43 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:10:43 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:10:43 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:10:43 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:10:54 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:10:54 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:10:54 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:10:54 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:11:04 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:11:04 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:11:04 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:11:04 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:11:14 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:11:14 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:11:14 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:11:14 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:11:25 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:11:25 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:11:25 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:11:25 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:11:35 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:11:35 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:11:35 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:11:35 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:11:45 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:11:45 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:11:45 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:11:45 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:11:56 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:11:56 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:11:56 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:11:56 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:12:06 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:12:06 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:12:06 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:12:06 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:12:16 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:12:16 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:12:16 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:12:16 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:12:26 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:12:26 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:12:26 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:12:26 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:12:36 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:12:36 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:12:36 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:12:36 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:12:47 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:12:47 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:12:47 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:12:47 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:12:57 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:12:57 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:12:57 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:12:57 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:13:07 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:13:07 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:13:07 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:13:07 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:13:18 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:13:18 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:13:18 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:13:18 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:13:28 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:13:28 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:13:28 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:13:28 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:13:38 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:13:38 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:13:38 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:13:38 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:13:49 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:13:49 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:13:49 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:13:49 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:13:59 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:13:59 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:13:59 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:13:59 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:14:09 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:14:09 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:14:09 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:14:09 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:14:19 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:14:19 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:14:19 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:14:19 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:14:30 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:14:30 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:14:30 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:14:30 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:14:40 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:14:40 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:14:40 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:14:40 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:14:51 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:14:51 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:14:51 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:14:51 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:15:01 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:15:01 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:15:01 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:15:01 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:15:11 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:15:11 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:15:11 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:15:11 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:15:21 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:15:21 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:15:21 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:15:21 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:15:34 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:15:34 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:15:34 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:15:34 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:15:45 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:15:45 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:15:45 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:15:45 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:15:56 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:15:56 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:15:56 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:15:56 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:16:06 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:16:06 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:16:06 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:16:06 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:16:16 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:16:16 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:16:16 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:16:16 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:16:26 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:16:26 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:16:26 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:16:26 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:16:37 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:16:37 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:16:37 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:16:37 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:16:47 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:16:47 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:16:47 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:16:47 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:16:57 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:16:57 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:16:57 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:16:57 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:17:07 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:17:07 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:17:07 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:17:07 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:17:18 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:17:18 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:17:18 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:17:18 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:17:28 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:17:28 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:17:28 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:17:28 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:17:38 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:17:38 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:17:38 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:17:38 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:17:49 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:17:49 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:17:49 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:17:49 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:17:59 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:17:59 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:17:59 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:17:59 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:18:09 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:18:09 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:18:09 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:18:09 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:18:20 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:18:20 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:18:20 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:18:20 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:18:30 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:18:30 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:18:30 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:18:30 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:18:40 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:18:40 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:18:40 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:18:40 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:18:50 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:18:50 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:18:50 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:18:50 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:19:01 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:19:01 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:19:01 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:19:01 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:19:11 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:19:11 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:19:11 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:19:11 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:19:21 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:19:21 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:19:21 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:19:21 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:19:33 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:19:33 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:19:33 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:19:33 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:19:43 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:19:43 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:19:43 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:19:43 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:19:53 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:19:53 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:19:53 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:19:53 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:20:03 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:20:03 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:20:03 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:20:03 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:20:14 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:20:14 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:20:14 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:20:14 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:20:24 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:20:24 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:20:24 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:20:24 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:20:34 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:20:34 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:20:34 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:20:34 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:20:45 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:20:45 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:20:45 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:20:45 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:20:56 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:20:56 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:20:56 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:20:56 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:21:06 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:21:06 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:21:06 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:21:06 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:21:16 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:21:16 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:21:16 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:21:16 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:21:26 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:21:26 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:21:26 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:21:26 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:21:37 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:21:37 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:21:37 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:21:37 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:21:47 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:21:47 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:21:47 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:21:47 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:21:57 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:21:57 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:21:57 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:21:57 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:22:07 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:22:07 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:22:07 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:22:07 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:22:18 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:22:18 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:22:18 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:22:18 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:22:28 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:22:28 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:22:28 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:22:28 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:22:38 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:22:38 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:22:38 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:22:38 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:22:49 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:22:49 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:22:49 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:22:49 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:22:59 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:22:59 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:22:59 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:22:59 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:23:09 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:23:09 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:23:09 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:23:09 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:23:19 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:23:19 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:23:19 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:23:19 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:23:30 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:23:30 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:23:30 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:23:30 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:23:40 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:23:40 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:23:40 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:23:40 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:23:50 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:23:50 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:23:50 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:23:50 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:24:00 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:24:00 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:24:00 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:24:00 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:24:11 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:24:11 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:24:11 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:24:11 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:24:21 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:24:21 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:24:21 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:24:21 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:24:31 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:24:31 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:24:31 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:24:31 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:24:41 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:24:41 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:24:41 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:24:41 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:24:52 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:24:52 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:24:52 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:24:52 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:25:02 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:25:02 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:25:02 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:25:02 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:25:12 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:25:12 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:25:12 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:25:12 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:25:27 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:25:27 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:25:27 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:25:27 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:25:39 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:25:39 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:25:39 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:25:39 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:25:50 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:25:50 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:25:50 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:25:50 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:26:00 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:26:00 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:26:00 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:26:00 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:26:11 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:26:11 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:26:11 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:26:11 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:26:22 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:26:22 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:26:22 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:26:22 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:26:33 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:26:33 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:26:33 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:26:33 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:26:43 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:26:43 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:26:43 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:26:43 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:26:53 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:26:53 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:26:53 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:26:53 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:27:03 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:27:03 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:27:03 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:27:03 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:27:14 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:27:14 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:27:14 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:27:14 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:27:25 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:27:25 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:27:25 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:27:25 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:27:35 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:27:35 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:27:35 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:27:35 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:27:45 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:27:45 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:27:45 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:27:45 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:27:55 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:27:55 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:27:55 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:27:55 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:28:06 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:28:06 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:28:06 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:28:06 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:28:16 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:28:16 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:28:16 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:28:16 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:28:26 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:28:26 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:28:26 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:28:26 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:28:37 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:28:37 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:28:37 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:28:37 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:28:47 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:28:47 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:28:47 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:28:47 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:28:58 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:28:58 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:28:58 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:28:58 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:29:08 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:29:08 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:29:08 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:29:08 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:29:18 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:29:18 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:29:18 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:29:18 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:29:28 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:29:28 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:29:28 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:29:28 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:29:39 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:29:39 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:29:39 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:29:39 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:29:49 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:29:49 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:29:49 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:29:49 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:29:59 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:29:59 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:29:59 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:29:59 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:30:10 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:30:10 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:30:10 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:30:10 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:30:20 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:30:20 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:30:20 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:30:20 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:30:34 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:30:34 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:30:34 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:30:34 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:30:44 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:30:44 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:30:44 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:30:44 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:30:54 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:30:54 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:30:54 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:30:54 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:31:05 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:31:05 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:31:05 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:31:05 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:31:15 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:31:15 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:31:15 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:31:15 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:31:25 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:31:25 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:31:25 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:31:25 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:31:35 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:31:35 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:31:35 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:31:35 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:31:46 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:31:46 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:31:46 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:31:46 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:31:56 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:31:56 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:31:56 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:31:56 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:32:06 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:32:06 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:32:06 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:32:06 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:32:16 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:32:16 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:32:16 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:32:16 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:32:27 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:32:27 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:32:27 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:32:27 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:32:37 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:32:37 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:32:37 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:32:37 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:32:47 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:32:47 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:32:47 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:32:47 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:33:01 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:33:01 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:33:01 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:33:01 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:33:11 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:33:11 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:33:11 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:33:11 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:33:22 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:33:22 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:33:22 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:33:22 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:33:32 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:33:32 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:33:32 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:33:32 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:33:42 | DEBUG    | telegram.ext.ExtBot       | No new updates found.
+2026-03-20 18:33:42 | DEBUG    | telegram.ext.ExtBot       | ()
+2026-03-20 18:33:42 | DEBUG    | telegram.ext.ExtBot       | Exiting: get_updates
+2026-03-20 18:33:42 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:33:47 | DEBUG    | telegram.ext.Application  | Application received stop signal. Shutting down.
+2026-03-20 18:33:47 | DEBUG    | telegram.ext.Updater      | Stopping Updater
+2026-03-20 18:33:47 | DEBUG    | telegram.ext.Updater      | Waiting background polling task to finish up.
+2026-03-20 18:33:47 | DEBUG    | telegram.ext.Updater      | Network loop retry getting Updates was cancelled
+2026-03-20 18:33:47 | DEBUG    | telegram.ext.Updater      | Calling `get_updates` one more time to mark all fetched updates as read.
+2026-03-20 18:33:47 | DEBUG    | telegram.ext.ExtBot       | Entering: get_updates
+2026-03-20 18:33:48 | INFO     | root                      | Received KeyboardInterrupt — shutting down...

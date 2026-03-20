@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ServiceBot — Telegram Bot Portfolio</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --tg-blue: #2AABEE;
+      --tg-dark: #17212B;
+      --tg-darker: #0E1621;
+      --tg-panel: #1C2733;
+      --tg-msg-out: #2B5278;
+      --tg-msg-in: #182533;
+      --tg-accent: #5288C1;
+      --tg-green: #4CAF50;
+      --tg-gold: #FFB400;
+      --tg-red: #F44336;
+      --glow: 0 0 40px rgba(42,171,238,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--tg-darker);
+      color: #e8ecf0;
+      overflow-x: hidden;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--tg-darker); }
+    ::-webkit-scrollbar-thumb { background: var(--tg-accent); border-radius: 3px; }
+
+    /* ── Gradient Text ── */
+    .grad-text {
+      background: linear-gradient(135deg, #2AABEE 0%, #5288C1 50%, #8B5CF6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Animated gradient bg ── */
+    .hero-bg {
+      background: radial-gradient(ellipse at 20% 50%, rgba(42,171,238,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(82,136,193,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 50% 80%, rgba(139,92,246,0.06) 0%, transparent 60%),
+                  var(--tg-darker);
+    }
+
+    /* ── Glassmorphism card ── */
+    .glass {
+      background: rgba(28, 39, 51, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(42,171,238,0.12);
+      box-shadow: var(--glow);
+    }
+
+    /* ── Telegram Phone Mock ── */
+    .phone-frame {
+      width: 300px;
+      height: 580px;
+      background: #1a1a2e;
+      border-radius: 36px;
+      border: 3px solid #333;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px #444, inset 0 1px 0 rgba(255,255,255,0.05);
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 22px;
+      background: #1a1a2e;
+      border-radius: 12px;
+      z-index: 10;
+      border: 2px solid #333;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--tg-darker);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── TG Chat Header ── */
+    .tg-header {
+      background: var(--tg-dark);
+      padding: 38px 12px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      flex-shrink: 0;
+    }
+
+    .tg-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2AABEE, #5288C1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .tg-chat-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      scrollbar-width: none;
+    }
+    .tg-chat-area::-webkit-scrollbar { display: none; }
+
+    /* ── Messages ── */
+    .msg-in, .msg-out {
+      max-width: 85%;
+      padding: 7px 10px;
+      border-radius: 14px;
+      font-size: 11.5px;
+      line-height: 1.5;
+      position: relative;
+      animation: fadeMsg 0.3s ease;
+    }
+
+    .msg-in {
+      background: var(--tg-msg-in);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .msg-out {
+      background: var(--tg-msg-out);
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+      color: #e8f4fd;
+    }
+
+    .msg-time {
+      font-size: 9px;
+      color: rgba(255,255,255,0.35);
+      text-align: right;
+      margin-top: 3px;
+    }
+
+    @keyframes fadeMsg {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Inline Buttons inside chat ── */
+    .tg-btn-row {
+      display: flex;
+      gap: 4px;
+      margin-top: 5px;
+      flex-wrap: wrap;
+    }
+
+    .tg-inline-btn {
+      background: rgba(42,171,238,0.18);
+      border: 1px solid rgba(42,171,238,0.3);
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 10px;
+      color: var(--tg-blue);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .tg-inline-btn:hover {
+      background: rgba(42,171,238,0.35);
+      transform: scale(1.02);
+    }
+
+    .tg-inline-btn.active {
+      background: var(--tg-blue);
+      color: white;
+      border-color: var(--tg-blue);
+    }
+
+    /* ── Chat input bar ── */
+    .tg-input-bar {
+      background: var(--tg-dark);
+      padding: 8px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      flex-shrink: 0;
+    }
+
+    .tg-input {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 11px;
+      color: #ccc;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .tg-send-btn {
+      width: 30px;
+      height: 30px;
+      background: var(--tg-blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.15s;
+      flex-shrink: 0;
+    }
+
+    .tg-send-btn:hover { transform: scale(1.1); }
+
+    /* ── Tabs ── */
+    .tab-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .tab-btn.active {
+      background: rgba(42,171,238,0.15);
+      border-color: rgba(42,171,238,0.4);
+      color: var(--tg-blue);
+    }
+
+    .tab-btn:not(.active):hover {
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ── Code Block ── */
+    .code-block {
+      background: #0d1117;
+      border: 1px solid rgba(42,171,238,0.15);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .code-header {
+      background: rgba(42,171,238,0.08);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(42,171,238,0.1);
+    }
+
+    .code-dots { display: flex; gap: 6px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.7;
+      padding: 16px;
+      overflow-x: auto;
+      color: #c9d1d9;
+    }
+
+    /* syntax colors */
+    .kw  { color: #ff7b72; }
+    .fn  { color: #d2a8ff; }
+    .st  { color: #a5d6ff; }
+    .cm  { color: #8b949e; font-style: italic; }
+    .nm  { color: #79c0ff; }
+    .op  { color: #e3b341; }
+    .dc  { color: #7ee787; }
+
+    /* ── Feature Badge ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .badge-blue  { background: rgba(42,171,238,0.15); color: #2AABEE; border: 1px solid rgba(42,171,238,0.3); }
+    .badge-green { background: rgba(76,175,80,0.15);  color: #4CAF50; border: 1px solid rgba(76,175,80,0.3); }
+    .badge-gold  { background: rgba(255,180,0,0.15);  color: #FFB400; border: 1px solid rgba(255,180,0,0.3); }
+    .badge-purple{ background: rgba(139,92,246,0.15); color: #A78BFA; border: 1px solid rgba(139,92,246,0.3); }
+
+    /* ── Stat Card ── */
+    .stat-card {
+      background: var(--tg-panel);
+      border: 1px solid rgba(42,171,238,0.1);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .stat-card:hover {
+      border-color: rgba(42,171,238,0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(42,171,238,0.1);
+    }
+
+    /* ── File Tree ── */
+    .file-tree {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      line-height: 2;
+    }
+
+    .file-dir  { color: var(--tg-blue); }
+    .file-py   { color: #A5D6FF; }
+    .file-txt  { color: #7EE787; }
+    .file-md   { color: #E3B341; }
+    .file-env  { color: #F78166; }
+
+    /* ── Timeline ── */
+    .timeline-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2AABEE, #5288C1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      box-shadow: 0 0 20px rgba(42,171,238,0.3);
+    }
+
+    /* ── Glow pulse animation ── */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(42,171,238,0.2); }
+      50% { box-shadow: 0 0 40px rgba(42,171,238,0.5); }
+    }
+    .pulse { animation: pulse-glow 3s ease-in-out infinite; }
+
+    /* ── Fade-in on scroll ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(14,22,33,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(42,171,238,0.1);
+    }
+
+    /* ── Typing cursor ── */
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: var(--tg-blue);
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ── Admin panel table ── */
+    .admin-table th {
+      background: rgba(42,171,238,0.08);
+      color: var(--tg-blue);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 10px 14px;
+    }
+
+    .admin-table td {
+      padding: 10px 14px;
+      font-size: 12px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .status-new { background: rgba(255,180,0,0.15); color: #FFB400; border-radius: 6px; padding: 2px 8px; font-size: 10px; font-weight: 600; }
+    .status-done { background: rgba(76,175,80,0.15); color: #4CAF50; border-radius: 6px; padding: 2px 8px; font-size: 10px; font-weight: 600; }
+
+    /* ── Section headings ── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(42,171,238,0.08);
+      border: 1px solid rgba(42,171,238,0.2);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--tg-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .phone-frame { width: 260px; height: 500px; }
+      .hide-mobile { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ NAV ══ -->
+<nav>
+  <div style="max-width:1200px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; justify-content:space-between;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div style="width:32px; height:32px; background:linear-gradient(135deg,#2AABEE,#5288C1); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px;">🤖</div>
+      <span style="font-weight:700; font-size:16px;">Service<span class="grad-text">Bot</span></span>
+    </div>
+    <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+      <a href="#demo"     style="color:rgba(255,255,255,0.6); text-decoration:none; font-size:13px; padding:6px 12px; border-radius:8px; transition:all 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Demo</a>
+      <a href="#features" style="color:rgba(255,255,255,0.6); text-decoration:none; font-size:13px; padding:6px 12px; border-radius:8px; transition:all 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Features</a>
+      <a href="#code"     style="color:rgba(255,255,255,0.6); text-decoration:none; font-size:13px; padding:6px 12px; border-radius:8px; transition:all 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Code</a>
+      <a href="#structure" style="color:rgba(255,255,255,0.6); text-decoration:none; font-size:13px; padding:6px 12px; border-radius:8px; transition:all 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Structure</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════ HERO ══ -->
+<section class="hero-bg" style="padding: 120px 24px 80px; min-height: 100vh; display: flex; align-items: center;">
+  <div style="max-width:1200px; margin:0 auto; width:100%;">
+    <div style="display:flex; gap:60px; align-items:center; flex-wrap:wrap; justify-content:center;">
+
+      <!-- Left side -->
+      <div style="flex:1; min-width:280px; max-width:560px;">
+        <div class="section-label">🐍 Python · python-telegram-bot 20.x</div>
+
+        <h1 style="font-size:clamp(36px,5vw,58px); font-weight:900; line-height:1.1; margin-bottom:20px;">
+          Production-Ready<br>
+          <span class="grad-text">Telegram Bot</span>
+        </h1>
+
+        <p style="color:rgba(255,255,255,0.6); font-size:16px; line-height:1.7; margin-bottom:32px; max-width:480px;">
+          A fully-featured async Telegram bot with user order management,
+          admin panel, SQLite database, rate limiting, and logging — ready to deploy.
+        </p>
+
+        <!-- Tech badges -->
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:36px;">
+          <span class="badge badge-blue">🤖 PTB 20.x</span>
+          <span class="badge badge-green">🗄️ SQLite + aiosqlite</span>
+          <span class="badge badge-gold">⚡ Async/Await</span>
+          <span class="badge badge-purple">🔐 Admin Panel</span>
+          <span class="badge badge-blue">📊 Statistics</span>
+          <span class="badge badge-green">📤 CSV Export</span>
+        </div>
+
+        <!-- Stats row -->
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:14px;">
+          <div class="stat-card">
+            <div style="font-size:28px; font-weight:800; color:var(--tg-blue);">5</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.5); margin-top:4px;">Modules</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-size:28px; font-weight:800; color:#7EE787;">750+</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.5); margin-top:4px;">Lines of Code</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-size:28px; font-weight:800; color:#E3B341;">100%</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.5); margin-top:4px;">Async</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone mockup -->
+      <div id="demo" style="display:flex; justify-content:center;">
+        <div class="phone-frame pulse" style="position:relative;">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+
+            <!-- TG Header -->
+            <div class="tg-header">
+              <div class="tg-avatar">🤖</div>
+              <div>
+                <div style="font-size:13px; font-weight:600;">ServiceBot</div>
+                <div style="font-size:10px; color:#4CAF50;">● online</div>
+              </div>
+            </div>
+
+            <!-- Chat area -->
+            <div class="tg-chat-area" id="chatArea">
+              <!-- Messages injected by JS -->
+            </div>
+
+            <!-- Input bar -->
+            <div class="tg-input-bar">
+              <input class="tg-input" id="chatInput" placeholder="Message…" readonly />
+              <div class="tg-send-btn" id="sendBtn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ FEATURES ══ -->
+<section id="features" style="padding: 80px 24px; background: var(--tg-dark);">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:50px;" class="fade-in">
+      <div class="section-label" style="display:inline-flex;">✨ Capabilities</div>
+      <h2 style="font-size:clamp(28px,4vw,42px); font-weight:800;">Everything you need,<br><span class="grad-text">out of the box</span></h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:20px;">
+
+      <!-- Feature cards -->
+      <div class="glass fade-in" style="border-radius:16px; padding:24px;">
+        <div style="font-size:28px; margin-bottom:12px;">👤</div>
+        <h3 style="font-size:16px; font-weight:700; margin-bottom:10px;">User Panel</h3>
+        <ul style="color:rgba(255,255,255,0.6); font-size:13px; line-height:2; list-style:none;">
+          <li>✓ /start with inline menu</li>
+          <li>✓ Consultation & pricing info</li>
+          <li>✓ 4-step validated order form</li>
+          <li>✓ FAQ section</li>
+          <li>✓ Contact information</li>
+        </ul>
+      </div>
+
+      <div class="glass fade-in" style="border-radius:16px; padding:24px;">
+        <div style="font-size:28px; margin-bottom:12px;">🔐</div>
+        <h3 style="font-size:16px; font-weight:700; margin-bottom:10px;">Admin Panel</h3>
+        <ul style="color:rgba(255,255,255,0.6); font-size:13px; line-height:2; list-style:none;">
+          <li>✓ Password-protected login</li>
+          <li>✓ Paginated order viewer</li>
+          <li>✓ Live statistics dashboard</li>
+          <li>✓ CSV export (in-memory)</li>
+          <li>✓ Broadcast to all users</li>
+        </ul>
+      </div>
+
+      <div class="glass fade-in" style="border-radius:16px; padding:24px;">
+        <div style="font-size:28px; margin-bottom:12px;">🗄️</div>
+        <h3 style="font-size:16px; font-weight:700; margin-bottom:10px;">Database</h3>
+        <ul style="color:rgba(255,255,255,0.6); font-size:13px; line-height:2; list-style:none;">
+          <li>✓ SQLite with WAL mode</li>
+          <li>✓ Async aiosqlite driver</li>
+          <li>✓ users & orders tables</li>
+          <li>✓ Indexed queries</li>
+          <li>✓ Auto-created on first run</li>
+        </ul>
+      </div>
+
+      <div class="glass fade-in" style="border-radius:16px; padding:24px;">
+        <div style="font-size:28px; margin-bottom:12px;">🛡️</div>
+        <h3 style="font-size:16px; font-weight:700; margin-bottom:10px;">Production Ready</h3>
+        <ul style="color:rgba(255,255,255,0.6); font-size:13px; line-height:2; list-style:none;">
+          <li>✓ Rate limiting (5 msg/min)</li>
+          <li>✓ Rotating log file (5 MB)</li>
+          <li>✓ Global error handler</li>
+          <li>✓ Graceful shutdown</li>
+          <li>✓ Input validation (regex)</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ INTERACTIVE DEMO TABS ══ -->
+<section style="padding: 80px 24px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:50px;" class="fade-in">
+      <div class="section-label" style="display:inline-flex;">🎮 Interactive Demo</div>
+      <h2 style="font-size:clamp(28px,4vw,42px); font-weight:800;">See it in <span class="grad-text">action</span></h2>
+    </div>
+
+    <!-- Tabs -->
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px;" class="fade-in">
+      <button class="tab-btn active" onclick="switchTab('user')"   id="tab-user">👤 User Flow</button>
+      <button class="tab-btn"        onclick="switchTab('order')"  id="tab-order">📋 Order Form</button>
+      <button class="tab-btn"        onclick="switchTab('admin')"  id="tab-admin">🔐 Admin Panel</button>
+      <button class="tab-btn"        onclick="switchTab('stats')"  id="tab-stats">📊 Statistics</button>
+    </div>
+
+    <!-- Tab content -->
+    <div id="tab-content" class="fade-in">
+
+      <!-- USER FLOW TAB -->
+      <div id="content-user" class="glass" style="border-radius:16px; padding:28px;">
+        <h3 style="font-size:18px; font-weight:700; margin-bottom:16px; color:var(--tg-blue);">👤 User Experience</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; flex-wrap:wrap;">
+          <div>
+            <p style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.7; margin-bottom:16px;">
+              When a user sends <code style="background:rgba(42,171,238,0.15); padding:2px 6px; border-radius:4px;">/start</code>,
+              the bot greets them with a rich HTML message and an interactive 2×2 inline keyboard.
+            </p>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:14px;">
+                <div style="font-size:12px; color:var(--tg-blue); font-weight:600; margin-bottom:6px;">💼 Consultation</div>
+                <div style="font-size:12px; color:rgba(255,255,255,0.6);">Pricing catalog · From $100/hr · Strategy sessions</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:14px;">
+                <div style="font-size:12px; color:var(--tg-blue); font-weight:600; margin-bottom:6px;">❓ FAQ</div>
+                <div style="font-size:12px; color:rgba(255,255,255,0.6);">5 Q&amp;A pairs · Payments · Refunds · Revisions</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:14px;">
+                <div style="font-size:12px; color:var(--tg-blue); font-weight:600; margin-bottom:6px;">📬 Contacts</div>
+                <div style="font-size:12px; color:rgba(255,255,255,0.6);">Email · Telegram · WhatsApp · Website · Hours</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="background:#0d1117; border-radius:10px; padding:16px; font-family:'JetBrains Mono',monospace; font-size:12px; line-height:1.8;">
+              <div style="color:#8b949e; margin-bottom:8px;"># Simulated /start response</div>
+              <div style="color:#e8ecf0;">👋 <span style="color:#a5d6ff;"><b>Welcome to ServiceBot!</b></span></div>
+              <div style="color:rgba(255,255,255,0.5); margin:6px 0;">We provide professional digital services:</div>
+              <div style="color:#7ee787;">• Web &amp; mobile development</div>
+              <div style="color:#7ee787;">• Business consulting</div>
+              <div style="color:#7ee787;">• Technical support</div>
+              <div style="margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                <div style="background:rgba(42,171,238,0.15); border:1px solid rgba(42,171,238,0.3); border-radius:6px; padding:5px; text-align:center; color:#2AABEE; font-size:11px;">💼 Consultation</div>
+                <div style="background:rgba(42,171,238,0.15); border:1px solid rgba(42,171,238,0.3); border-radius:6px; padding:5px; text-align:center; color:#2AABEE; font-size:11px;">📋 Order Service</div>
+                <div style="background:rgba(42,171,238,0.15); border:1px solid rgba(42,171,238,0.3); border-radius:6px; padding:5px; text-align:center; color:#2AABEE; font-size:11px;">❓ FAQ</div>
+                <div style="background:rgba(42,171,238,0.15); border:1px solid rgba(42,171,238,0.3); border-radius:6px; padding:5px; text-align:center; color:#2AABEE; font-size:11px;">📬 Contacts</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORDER FORM TAB -->
+      <div id="content-order" class="glass" style="border-radius:16px; padding:28px; display:none;">
+        <h3 style="font-size:18px; font-weight:700; margin-bottom:16px; color:var(--tg-blue);">📋 Order Form — 4 Steps with Validation</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;">
+
+          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(42,171,238,0.2); border-radius:12px; padding:18px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+              <div style="width:24px; height:24px; background:var(--tg-blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;">1</div>
+              <span style="font-weight:600; font-size:13px;">Full Name</span>
+            </div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.5); line-height:1.6;">
+              Regex: letters + spaces + hyphens<br>Minimum 2 characters
+            </div>
+            <div style="margin-top:8px; font-size:10px;">
+              <span style="color:#4CAF50;">✓ "John Smith"</span> &nbsp;
+              <span style="color:#F44336;">✗ "J1"</span>
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(42,171,238,0.2); border-radius:12px; padding:18px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+              <div style="width:24px; height:24px; background:var(--tg-blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;">2</div>
+              <span style="font-weight:600; font-size:13px;">Email</span>
+            </div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.5); line-height:1.6;">
+              Full RFC-style regex validation<br>Domain + TLD required
+            </div>
+            <div style="margin-top:8px; font-size:10px;">
+              <span style="color:#4CAF50;">✓ "user@ex.com"</span> &nbsp;
+              <span style="color:#F44336;">✗ "user@"</span>
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(42,171,238,0.2); border-radius:12px; padding:18px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+              <div style="width:24px; height:24px; background:var(--tg-blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;">3</div>
+              <span style="font-weight:600; font-size:13px;">Phone</span>
+            </div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.5); line-height:1.6;">
+              E.164 international format<br>7–20 digits, optional +
+            </div>
+            <div style="margin-top:8px; font-size:10px;">
+              <span style="color:#4CAF50;">✓ "+12025550100"</span>
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(42,171,238,0.2); border-radius:12px; padding:18px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+              <div style="width:24px; height:24px; background:var(--tg-blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;">4</div>
+              <span style="font-weight:600; font-size:13px;">Description</span>
+            </div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.5); line-height:1.6;">
+              Free text task description<br>Minimum 10 characters
+            </div>
+            <div style="margin-top:8px; font-size:10px;">
+              <span style="color:#4CAF50;">✓ Saved to DB → Admin notified</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ADMIN PANEL TAB -->
+      <div id="content-admin" class="glass" style="border-radius:16px; padding:28px; display:none;">
+        <h3 style="font-size:18px; font-weight:700; margin-bottom:16px; color:var(--tg-blue);">🔐 Admin Panel — Orders Viewer</h3>
+        <div style="overflow-x:auto; border-radius:10px; border:1px solid rgba(255,255,255,0.08);">
+          <table class="admin-table" style="width:100%; border-collapse:collapse;">
+            <thead>
+              <tr>
+                <th style="text-align:left;">ID</th>
+                <th style="text-align:left;">Name</th>
+                <th style="text-align:left;">Email</th>
+                <th style="text-align:left;">Service</th>
+                <th style="text-align:left;">Date</th>
+                <th style="text-align:left;">Status</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <tr>
+                <td style="color:rgba(255,255,255,0.4);">#1</td>
+                <td>Alice Johnson</td>
+                <td style="color:rgba(255,255,255,0.6);">alice@corp.io</td>
+                <td style="color:rgba(255,255,255,0.6);">Web audit needed…</td>
+                <td style="color:rgba(255,255,255,0.4);">2025-01-15</td>
+                <td><span class="status-done">done</span></td>
+              </tr>
+              <tr>
+                <td style="color:rgba(255,255,255,0.4);">#2</td>
+                <td>Bob Martinez</td>
+                <td style="color:rgba(255,255,255,0.6);">bob@startup.com</td>
+                <td style="color:rgba(255,255,255,0.6);">Mobile app MVP…</td>
+                <td style="color:rgba(255,255,255,0.4);">2025-01-18</td>
+                <td><span class="status-new">new</span></td>
+              </tr>
+              <tr>
+                <td style="color:rgba(255,255,255,0.4);">#3</td>
+                <td>Carol Chen</td>
+                <td style="color:rgba(255,255,255,0.6);">carol@agency.net</td>
+                <td style="color:rgba(255,255,255,0.6);">Consulting session…</td>
+                <td style="color:rgba(255,255,255,0.4);">2025-01-20</td>
+                <td><span class="status-new">new</span></td>
+              </tr>
+              <tr>
+                <td style="color:rgba(255,255,255,0.4);">#4</td>
+                <td>David Kim</td>
+                <td style="color:rgba(255,255,255,0.6);">david@tech.co</td>
+                <td style="color:rgba(255,255,255,0.6);">Code review req…</td>
+                <td style="color:rgba(255,255,255,0.4);">2025-01-22</td>
+                <td><span class="status-done">done</span></td>
+              </tr>
+              <tr>
+                <td style="color:rgba(255,255,255,0.4);">#5</td>
+                <td>Eva Rossi</td>
+                <td style="color:rgba(255,255,255,0.6);">eva@design.it</td>
+                <td style="color:rgba(255,255,255,0.6);">UX strategy plan…</td>
+                <td style="color:rgba(255,255,255,0.4);">2025-01-24</td>
+                <td><span class="status-new">new</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button onclick="exportCSV()" style="background:rgba(42,171,238,0.15); border:1px solid rgba(42,171,238,0.3); color:#2AABEE; padding:8px 16px; border-radius:8px; cursor:pointer; font-size:13px; transition:all 0.2s;" onmouseover="this.style.background='rgba(42,171,238,0.3)'" onmouseout="this.style.background='rgba(42,171,238,0.15)'">📤 Export CSV</button>
+          <button onclick="showBroadcast()" style="background:rgba(139,92,246,0.15); border:1px solid rgba(139,92,246,0.3); color:#A78BFA; padding:8px 16px; border-radius:8px; cursor:pointer; font-size:13px; transition:all 0.2s;" onmouseover="this.style.background='rgba(139,92,246,0.3)'" onmouseout="this.style.background='rgba(139,92,246,0.15)'">📣 Broadcast</button>
+        </div>
+        <div id="broadcastBox" style="display:none; margin-top:14px; background:rgba(139,92,246,0.08); border:1px solid rgba(139,92,246,0.2); border-radius:10px; padding:14px;">
+          <textarea id="broadcastMsg" placeholder="Enter your broadcast message (HTML supported)…" style="width:100%; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; color:#e8ecf0; font-family:'Inter',sans-serif; font-size:13px; resize:vertical; min-height:80px;" rows="3"></textarea>
+          <button onclick="sendBroadcast()" style="margin-top:8px; background:rgba(139,92,246,0.3); border:1px solid rgba(139,92,246,0.4); color:#A78BFA; padding:7px 16px; border-radius:8px; cursor:pointer; font-size:13px;">📣 Send to All Users</button>
+          <span id="broadcastStatus" style="margin-left:12px; font-size:12px; color:#4CAF50;"></span>
+        </div>
+      </div>
+
+      <!-- STATS TAB -->
+      <div id="content-stats" class="glass" style="border-radius:16px; padding:28px; display:none;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
+          <h3 style="font-size:18px; font-weight:700; color:var(--tg-blue);">📊 Live Statistics</h3>
+          <button onclick="refreshStats()" style="background:rgba(42,171,238,0.15); border:1px solid rgba(42,171,238,0.3); color:#2AABEE; padding:7px 14px; border-radius:8px; cursor:pointer; font-size:12px;">🔄 Refresh</button>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-bottom:24px;">
+          <div class="stat-card">
+            <div style="font-size:11px; color:rgba(255,255,255,0.4); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.08em;">Total Users</div>
+            <div id="stat-users" style="font-size:32px; font-weight:800; color:var(--tg-blue);">247</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-size:11px; color:rgba(255,255,255,0.4); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.08em;">Today</div>
+            <div id="stat-today" style="font-size:32px; font-weight:800; color:#7EE787;">8</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-size:11px; color:rgba(255,255,255,0.4); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.08em;">This Week</div>
+            <div id="stat-week" style="font-size:32px; font-weight:800; color:#E3B341;">34</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-size:11px; color:rgba(255,255,255,0.4); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.08em;">All Time</div>
+            <div id="stat-total" style="font-size:32px; font-weight:800; color:#A78BFA;">182</div>
+          </div>
+        </div>
+
+        <!-- Mini chart bars -->
+        <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:16px;">
+          <div style="font-size:12px; color:rgba(255,255,255,0.4); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.08em;">Orders — Last 7 Days</div>
+          <div id="barChart" style="display:flex; align-items:flex-end; gap:8px; height:80px;">
+          </div>
+          <div id="barLabels" style="display:flex; gap:8px; margin-top:6px;"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ CODE ══ -->
+<section id="code" style="padding: 80px 24px; background: var(--tg-dark);">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:50px;" class="fade-in">
+      <div class="section-label" style="display:inline-flex;">💻 Source Code</div>
+      <h2 style="font-size:clamp(28px,4vw,42px); font-weight:800;">Clean &amp; <span class="grad-text">documented</span> code</h2>
+    </div>
+
+    <!-- Code tabs -->
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:0;" class="fade-in">
+      <button class="tab-btn active" onclick="switchCodeTab('main')"    id="ctab-main">main.py</button>
+      <button class="tab-btn"        onclick="switchCodeTab('user')"    id="ctab-user">handlers/user.py</button>
+      <button class="tab-btn"        onclick="switchCodeTab('db')"      id="ctab-db">database/db.py</button>
+      <button class="tab-btn"        onclick="switchCodeTab('settings')" id="ctab-settings">config/settings.py</button>
+    </div>
+
+    <div class="code-block fade-in" style="margin-top:0; border-top-left-radius:0;">
+
+      <!-- main.py -->
+      <div id="ccode-main">
+        <div class="code-header">
+          <div class="code-dots">
+            <div class="dot" style="background:#ff5f57;"></div>
+            <div class="dot" style="background:#febc2e;"></div>
+            <div class="dot" style="background:#28c840;"></div>
+          </div>
+          <span style="font-size:12px; color:rgba(255,255,255,0.4); font-family:'JetBrains Mono',monospace;">main.py</span>
+          <button onclick="copyCode('ccode-main')" style="background:none; border:1px solid rgba(255,255,255,0.15); color:rgba(255,255,255,0.5); padding:3px 10px; border-radius:6px; cursor:pointer; font-size:11px;" id="copy-main">Copy</button>
+        </div>
+<pre><span class="cm">"""main.py — Entry point. Logging · DB init · Handler registration."""</span>
+
+<span class="kw">import</span> asyncio, logging, sys
+<span class="kw">from</span> pathlib <span class="kw">import</span> Path
+<span class="kw">from</span> logging.handlers <span class="kw">import</span> RotatingFileHandler
+<span class="kw">from</span> dotenv <span class="kw">import</span> load_dotenv
+<span class="kw">from</span> telegram.ext <span class="kw">import</span> ApplicationBuilder
+<span class="kw">from</span> config <span class="kw">import</span> settings
+<span class="kw">from</span> database <span class="kw">import</span> Database
+<span class="kw">from</span> handlers <span class="kw">import</span> get_user_handlers, get_admin_handlers
+
+load_dotenv()
+
+
+<span class="kw">async def</span> <span class="fn">post_init</span>(application) -> <span class="nm">None</span>:
+    <span class="dc">"""Open DB, set bot commands, log startup info."""</span>
+    db = application.bot_data[<span class="st">"db"</span>]
+    <span class="kw">await</span> db.connect()
+    <span class="kw">await</span> application.bot.set_my_commands([
+        (<span class="st">"start"</span>,  <span class="st">"🏠 Main menu"</span>),
+        (<span class="st">"order"</span>,  <span class="st">"📋 Place an order"</span>),
+        (<span class="st">"faq"</span>,    <span class="st">"❓ FAQ"</span>),
+        (<span class="st">"admin"</span>,  <span class="st">"🔐 Admin panel"</span>),
+        (<span class="st">"cancel"</span>, <span class="st">"❌ Cancel"</span>),
+    ])
+    bot_info = <span class="kw">await</span> application.bot.get_me()
+    logging.info(<span class="st">"Bot started: @%s"</span>, bot_info.username)
+
+
+<span class="kw">async def</span> <span class="fn">error_handler</span>(update, context) -> <span class="nm">None</span>:
+    <span class="dc">"""Global error handler — log + notify user + alert admin."""</span>
+    logging.error(<span class="st">"Unhandled error:"</span>, exc_info=context.error)
+    <span class="kw">if</span> update <span class="kw">and</span> update.effective_message:
+        <span class="kw">await</span> update.effective_message.reply_text(
+            <span class="st">"⚠️ An unexpected error occurred. Please try again."</span>
+        )
+
+
+<span class="kw">def</span> <span class="fn">main</span>() -> <span class="nm">None</span>:
+    <span class="dc">"""Build app · inject DB · register handlers · start polling."""</span>
+    app = (
+        ApplicationBuilder()
+        .token(settings.BOT_TOKEN)
+        .post_init(post_init)
+        .post_shutdown(post_shutdown)
+        .build()
+    )
+    app.bot_data[<span class="st">"db"</span>] = Database(settings.DB_PATH)
+    <span class="kw">for</span> h <span class="kw">in</span> get_user_handlers(app.bot_data[<span class="st">"db"</span>]):
+        app.add_handler(h)
+    <span class="kw">for</span> h <span class="kw">in</span> get_admin_handlers(app.bot_data[<span class="st">"db"</span>]):
+        app.add_handler(h)
+    app.add_error_handler(error_handler)
+    app.run_polling(drop_pending_updates=<span class="nm">True</span>)
+
+
+<span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    main()</pre>
+      </div>
+
+      <!-- user.py -->
+      <div id="ccode-user" style="display:none;">
+        <div class="code-header">
+          <div class="code-dots">
+            <div class="dot" style="background:#ff5f57;"></div>
+            <div class="dot" style="background:#febc2e;"></div>
+            <div class="dot" style="background:#28c840;"></div>
+          </div>
+          <span style="font-size:12px; color:rgba(255,255,255,0.4); font-family:'JetBrains Mono',monospace;">handlers/user.py (excerpt)</span>
+          <button onclick="copyCode('ccode-user')" style="background:none; border:1px solid rgba(255,255,255,0.15); color:rgba(255,255,255,0.5); padding:3px 10px; border-radius:6px; cursor:pointer; font-size:11px;" id="copy-user">Copy</button>
+        </div>
+<pre><span class="cm">"""Rate limiting + validation + 4-step ConversationHandler."""</span>
+
+<span class="kw">from</span> collections <span class="kw">import</span> defaultdict
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime
+<span class="kw">import</span> re
+
+_rate_store: dict = defaultdict(list)
+
+
+<span class="kw">def</span> <span class="fn">_is_rate_limited</span>(user_id: <span class="nm">int</span>) -> <span class="nm">bool</span>:
+    <span class="dc">"""Sliding-window rate limiter (5 msgs / 60 sec)."""</span>
+    now = datetime.utcnow()
+    window = now.timestamp() - settings.RATE_LIMIT_SEC
+    _rate_store[user_id] = [
+        t <span class="kw">for</span> t <span class="kw">in</span> _rate_store[user_id] <span class="kw">if</span> t.timestamp() > window
+    ]
+    <span class="kw">if</span> len(_rate_store[user_id]) >= settings.RATE_LIMIT_MSG:
+        <span class="kw">return True</span>
+    _rate_store[user_id].append(now)
+    <span class="kw">return False</span>
+
+
+<span class="kw">def</span> <span class="fn">_valid_email</span>(text: <span class="nm">str</span>) -> <span class="nm">bool</span>:
+    <span class="dc">"""Validate email with RFC-style regex."""</span>
+    pattern = <span class="st">r"^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"</span>
+    <span class="kw">return bool</span>(re.match(pattern, text.strip()))
+
+
+<span class="kw">async def</span> <span class="fn">ask_description_received</span>(update, context) -> <span class="nm">int</span>:
+    <span class="dc">"""Save order to DB and notify admin on completion."""</span>
+    order_data = context.user_data[<span class="st">"order"</span>]
+    db = context.bot_data[<span class="st">"db"</span>]
+    order_id = <span class="kw">await</span> db.create_order(
+        user_id=update.effective_user.id,
+        **order_data
+    )
+    <span class="kw">await</span> context.bot.send_message(
+        chat_id=settings.ADMIN_CHAT_ID,
+        text=<span class="st">f"🔔 New Order #{order_id}\n👤 {order_data['name']}"</span>,
+        parse_mode=<span class="st">"HTML"</span>,
+    )
+    <span class="kw">return</span> ConversationHandler.END</pre>
+      </div>
+
+      <!-- db.py -->
+      <div id="ccode-db" style="display:none;">
+        <div class="code-header">
+          <div class="code-dots">
+            <div class="dot" style="background:#ff5f57;"></div>
+            <div class="dot" style="background:#febc2e;"></div>
+            <div class="dot" style="background:#28c840;"></div>
+          </div>
+          <span style="font-size:12px; color:rgba(255,255,255,0.4); font-family:'JetBrains Mono',monospace;">database/db.py (excerpt)</span>
+          <button onclick="copyCode('ccode-db')" style="background:none; border:1px solid rgba(255,255,255,0.15); color:rgba(255,255,255,0.5); padding:3px 10px; border-radius:6px; cursor:pointer; font-size:11px;" id="copy-db">Copy</button>
+        </div>
+<pre><span class="cm">"""Async SQLite manager using aiosqlite (WAL mode)."""</span>
+
+<span class="kw">import</span> aiosqlite, csv, io
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime, timedelta
+
+
+<span class="kw">class</span> <span class="fn">Database</span>:
+
+    <span class="kw">async def</span> <span class="fn">connect</span>(self) -> <span class="nm">None</span>:
+        <span class="dc">"""Open connection, enable WAL, create tables."""</span>
+        self._conn = <span class="kw">await</span> aiosqlite.connect(self._db_path)
+        self._conn.row_factory = aiosqlite.Row
+        <span class="kw">await</span> self._conn.execute(<span class="st">"PRAGMA journal_mode=WAL;"</span>)
+        <span class="kw">await</span> self._conn.execute(<span class="st">"PRAGMA foreign_keys=ON;"</span>)
+        <span class="kw">await</span> self._conn.execute(self._CREATE_USERS)
+        <span class="kw">await</span> self._conn.execute(self._CREATE_ORDERS)
+        <span class="kw">await</span> self._conn.commit()
+
+    <span class="kw">async def</span> <span class="fn">create_order</span>(self, user_id, name, email, phone, description) -> <span class="nm">int</span>:
+        <span class="dc">"""Insert a new order and return its auto-generated ID."""</span>
+        <span class="kw">async with</span> self._conn.execute(
+            <span class="st">"""INSERT INTO orders (user_id, name, email, phone, description)
+               VALUES (?, ?, ?, ?, ?)"""</span>,
+            (user_id, name, email, phone, description),
+        ) <span class="kw">as</span> cur:
+            order_id = cur.lastrowid
+        <span class="kw">await</span> self._conn.commit()
+        <span class="kw">return</span> order_id
+
+    <span class="kw">async def</span> <span class="fn">export_orders_csv</span>(self) -> <span class="nm">str</span>:
+        <span class="dc">"""Serialise all orders to in-memory CSV string."""</span>
+        orders = <span class="kw">await</span> self.get_all_orders()
+        output = io.StringIO()
+        writer = csv.writer(output, quoting=csv.QUOTE_ALL)
+        writer.writerow([<span class="st">"id","user_id","name","email","phone",
+                          "description","status","created_at"</span>])
+        <span class="kw">for</span> o <span class="kw">in</span> orders:
+            writer.writerow([o[<span class="st">"id"</span>], o[<span class="st">"user_id"</span>], o[<span class="st">"name"</span>], o[<span class="st">"email"</span>],
+                             o[<span class="st">"phone"</span>], o[<span class="st">"description"</span>], o[<span class="st">"status"</span>], o[<span class="st">"created_at"</span>]])
+        <span class="kw">return</span> output.getvalue()</pre>
+      </div>
+
+      <!-- settings.py -->
+      <div id="ccode-settings" style="display:none;">
+        <div class="code-header">
+          <div class="code-dots">
+            <div class="dot" style="background:#ff5f57;"></div>
+            <div class="dot" style="background:#febc2e;"></div>
+            <div class="dot" style="background:#28c840;"></div>
+          </div>
+          <span style="font-size:12px; color:rgba(255,255,255,0.4); font-family:'JetBrains Mono',monospace;">config/settings.py (excerpt)</span>
+          <button onclick="copyCode('ccode-settings')" style="background:none; border:1px solid rgba(255,255,255,0.15); color:rgba(255,255,255,0.5); padding:3px 10px; border-radius:6px; cursor:pointer; font-size:11px;" id="copy-settings">Copy</button>
+        </div>
+<pre><span class="cm">"""Centralised config — all constants, states, UI texts."""</span>
+
+<span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass, field
+<span class="kw">from</span> pathlib <span class="kw">import</span> Path
+<span class="kw">import</span> os
+
+
+<span class="op">@dataclass</span>(frozen=<span class="nm">True</span>)
+<span class="kw">class</span> <span class="fn">Settings</span>:
+    <span class="dc">"""Immutable settings loaded once at import time."""</span>
+
+    <span class="cm"># Secrets (from .env)</span>
+    BOT_TOKEN: <span class="nm">str</span> = field(
+        default_factory=<span class="kw">lambda</span>: os.getenv(<span class="st">"BOT_TOKEN"</span>, <span class="st">"YOUR_TOKEN"</span>)
+    )
+    ADMIN_CHAT_ID: <span class="nm">str</span> = field(
+        default_factory=<span class="kw">lambda</span>: os.getenv(<span class="st">"ADMIN_CHAT_ID"</span>, <span class="st">""</span>)
+    )
+
+    <span class="cm"># Auth</span>
+    ADMIN_PASSWORD: <span class="nm">str</span> = <span class="st">"admin2024secure"</span>
+
+    <span class="cm"># Rate limiting</span>
+    RATE_LIMIT_MSG: <span class="nm">int</span> = <span class="op">5</span>
+    RATE_LIMIT_SEC: <span class="nm">int</span> = <span class="op">60</span>
+
+    <span class="cm"># Conversation states</span>
+    ASK_NAME: <span class="nm">int</span> = <span class="op">0</span>
+    ASK_EMAIL: <span class="nm">int</span> = <span class="op">1</span>
+    ASK_PHONE: <span class="nm">int</span> = <span class="op">2</span>
+    ASK_DESCRIPTION: <span class="nm">int</span> = <span class="op">3</span>
+    ADMIN_WAIT_PASSWORD: <span class="nm">int</span> = <span class="op">10</span>
+    ADMIN_WAIT_BROADCAST: <span class="nm">int</span> = <span class="op">11</span>
+
+    <span class="cm"># All UI strings in one place</span>
+    TEXTS: dict = field(default_factory=<span class="kw">lambda</span>: {
+        <span class="st">"welcome"</span>: <span class="st">"👋 Welcome to ServiceBot!..."</span>,
+        <span class="st">"consultation"</span>: <span class="st">"💼 Consultation Services..."</span>,
+        <span class="cm"># ... 20+ more text constants</span>
+    })
+
+
+settings = Settings()</pre>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ FILE STRUCTURE ══ -->
+<section id="structure" style="padding: 80px 24px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:50px;" class="fade-in">
+      <div class="section-label" style="display:inline-flex;">📁 Project Structure</div>
+      <h2 style="font-size:clamp(28px,4vw,42px); font-weight:800;">Modular <span class="grad-text">architecture</span></h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; flex-wrap:wrap;">
+
+      <!-- File tree -->
+      <div class="glass fade-in" style="border-radius:16px; padding:28px;">
+        <div style="font-size:14px; font-weight:600; margin-bottom:18px; color:rgba(255,255,255,0.7);">📂 Project Root</div>
+        <div class="file-tree">
+          <div><span style="color:rgba(255,255,255,0.2);">telegram-bot/</span></div>
+          <div style="padding-left:16px;"><span style="color:rgba(255,255,255,0.2);">├── </span><span class="file-py">main.py</span> <span style="color:rgba(255,255,255,0.25); font-size:11px;">← entry point</span></div>
+          <div style="padding-left:16px;"><span style="color:rgba(255,255,255,0.2);">├── </span><span class="file-txt">requirements.txt</span></div>
+          <div style="padding-left:16px;"><span style="color:rgba(255,255,255,0.2);">├── </span><span class="file-env">.env.example</span></div>
+          <div style="padding-left:16px;"><span style="color:rgba(255,255,255,0.2);">├── </span><span class="file-md">README.md</span></div>
+          <div style="padding-left:16px; margin-top:6px;"><span style="color:rgba(255,255,255,0.2);">├── </span><span class="file-dir">config/</span></div>
+          <div style="padding-left:32px;"><span style="color:rgba(255,255,255,0.2);">│   ├── </span><span class="file-py">__init__.py</span></div>
+          <div style="padding-left:32px;"><span style="color:rgba(255,255,255,0.2);">│   └── </span><span class="file-py">settings.py</span> <span style="color:rgba(255,255,255,0.25); font-size:11px;">← all constants</span></div>
+          <div style="padding-left:16px; margin-top:6px;"><span style="color:rgba(255,255,255,0.2);">├── </span><span class="file-dir">database/</span></div>
+          <div style="padding-left:32px;"><span style="color:rgba(255,255,255,0.2);">│   ├── </span><span class="file-py">__init__.py</span></div>
+          <div style="padding-left:32px;"><span style="color:rgba(255,255,255,0.2);">│   └── </span><span class="file-py">db.py</span> <span style="color:rgba(255,255,255,0.25); font-size:11px;">← async CRUD</span></div>
+          <div style="padding-left:16px; margin-top:6px;"><span style="color:rgba(255,255,255,0.2);">├── </span><span class="file-dir">handlers/</span></div>
+          <div style="padding-left:32px;"><span style="color:rgba(255,255,255,0.2);">│   ├── </span><span class="file-py">__init__.py</span></div>
+          <div style="padding-left:32px;"><span style="color:rgba(255,255,255,0.2);">│   ├── </span><span class="file-py">user.py</span> <span style="color:rgba(255,255,255,0.25); font-size:11px;">← user flows</span></div>
+          <div style="padding-left:32px;"><span style="color:rgba(255,255,255,0.2);">│   └── </span><span class="file-py">admin.py</span> <span style="color:rgba(255,255,255,0.25); font-size:11px;">← admin panel</span></div>
+          <div style="padding-left:16px; margin-top:6px;"><span style="color:rgba(255,255,255,0.2);">├── </span><span class="file-dir">data/</span></div>
+          <div style="padding-left:32px;"><span style="color:rgba(255,255,255,0.2);">│   └── </span><span style="color:#F78166;">bot.db</span> <span style="color:rgba(255,255,255,0.25); font-size:11px;">← auto-created</span></div>
+          <div style="padding-left:16px; margin-top:6px;"><span style="color:rgba(255,255,255,0.2);">└── </span><span class="file-dir">logs/</span></div>
+          <div style="padding-left:32px;"><span style="color:rgba(255,255,255,0.2);">    └── </span><span style="color:#F78166;">bot.log</span> <span style="color:rgba(255,255,255,0.25); font-size:11px;">← rotating, 5 MB</span></div>
+        </div>
+      </div>
+
+      <!-- Timeline of stages -->
+      <div class="fade-in" style="display:flex; flex-direction:column; gap:0;">
+        <div style="font-size:14px; font-weight:600; margin-bottom:18px; color:rgba(255,255,255,0.7);">🏗️ Build Stages</div>
+
+        <div style="position:relative;">
+          <div style="position:absolute; left:17px; top:36px; bottom:0; width:2px; background:rgba(42,171,238,0.15);"></div>
+
+          <div style="display:flex; gap:14px; align-items:flex-start; padding-bottom:20px; position:relative; z-index:1;">
+            <div class="timeline-dot" style="font-size:11px; font-weight:700;">1</div>
+            <div>
+              <div style="font-weight:600; font-size:14px; margin-bottom:4px;">Config &amp; Setup</div>
+              <div style="font-size:12px; color:rgba(255,255,255,0.5);">settings.py · .env.example · requirements.txt · README.md</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:14px; align-items:flex-start; padding-bottom:20px; position:relative; z-index:1;">
+            <div class="timeline-dot" style="font-size:11px; font-weight:700;">2</div>
+            <div>
+              <div style="font-weight:600; font-size:14px; margin-bottom:4px;">Database Module</div>
+              <div style="font-size:12px; color:rgba(255,255,255,0.5);">Async SQLite · WAL mode · users &amp; orders tables · CSV export</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:14px; align-items:flex-start; padding-bottom:20px; position:relative; z-index:1;">
+            <div class="timeline-dot" style="font-size:11px; font-weight:700;">3</div>
+            <div>
+              <div style="font-weight:600; font-size:14px; margin-bottom:4px;">User Handlers</div>
+              <div style="font-size:12px; color:rgba(255,255,255,0.5);">Menu · FAQ · Contacts · 4-step order form · rate limiting</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:14px; align-items:flex-start; padding-bottom:20px; position:relative; z-index:1;">
+            <div class="timeline-dot" style="font-size:11px; font-weight:700;">4</div>
+            <div>
+              <div style="font-weight:600; font-size:14px; margin-bottom:4px;">Admin Handlers</div>
+              <div style="font-size:12px; color:rgba(255,255,255,0.5);">Login · paginated orders · stats · CSV export · broadcast</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:14px; align-items:flex-start; position:relative; z-index:1;">
+            <div class="timeline-dot" style="font-size:11px; font-weight:700;">5</div>
+            <div>
+              <div style="font-weight:600; font-size:14px; margin-bottom:4px;">Main Entry Point</div>
+              <div style="font-size:12px; color:rgba(255,255,255,0.5);">Logging · error handling · graceful shutdown · polling</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ QUICK START ══ -->
+<section style="padding: 80px 24px; background: var(--tg-dark);">
+  <div style="max-width:800px; margin:0 auto; text-align:center;" class="fade-in">
+    <div class="section-label" style="display:inline-flex;">🚀 Quick Start</div>
+    <h2 style="font-size:clamp(28px,4vw,42px); font-weight:800; margin-bottom:40px;">Up and running in <span class="grad-text">3 minutes</span></h2>
+
+    <div class="code-block" style="text-align:left; margin-bottom:28px;">
+      <div class="code-header">
+        <div class="code-dots">
+          <div class="dot" style="background:#ff5f57;"></div>
+          <div class="dot" style="background:#febc2e;"></div>
+          <div class="dot" style="background:#28c840;"></div>
+        </div>
+        <span style="font-size:12px; color:rgba(255,255,255,0.4); font-family:'JetBrains Mono',monospace;">Terminal</span>
+      </div>
+<pre><span class="cm"># 1. Clone &amp; install</span>
+git clone https://github.com/yourname/telegram-bot.git
+cd telegram-bot
+python -m venv venv &amp;&amp; source venv/bin/activate
+pip install -r requirements.txt
+
+<span class="cm"># 2. Configure secrets</span>
+cp .env.example .env
+<span class="cm"># → Edit .env: set BOT_TOKEN and ADMIN_CHAT_ID</span>
+
+<span class="cm"># 3. Run!</span>
+python main.py</pre>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; text-align:left;">
+      <div style="background:rgba(42,171,238,0.06); border:1px solid rgba(42,171,238,0.2); border-radius:12px; padding:18px;">
+        <div style="font-size:12px; color:var(--tg-blue); font-weight:700; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.06em;">Users interact via</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7); line-height:1.8;">/start → menu → order form → confirmation</div>
+      </div>
+      <div style="background:rgba(139,92,246,0.06); border:1px solid rgba(139,92,246,0.2); border-radius:12px; padding:18px;">
+        <div style="font-size:12px; color:#A78BFA; font-weight:700; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.06em;">Admin accesses via</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7); line-height:1.8;">/admin → password → panel → manage orders</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ FOOTER ══ -->
+<footer style="padding: 40px 24px; background: var(--tg-darker); border-top: 1px solid rgba(42,171,238,0.08);">
+  <div style="max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div style="width:28px; height:28px; background:linear-gradient(135deg,#2AABEE,#5288C1); border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:14px;">🤖</div>
+      <span style="font-weight:700;">ServiceBot</span>
+      <span style="color:rgba(255,255,255,0.3); font-size:13px;">— Production Telegram Bot</span>
+    </div>
+    <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+      <span class="badge badge-blue">python-telegram-bot 20.7</span>
+      <span class="badge badge-green">aiosqlite 0.19.0</span>
+      <span class="badge badge-gold">MIT License</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════ JAVASCRIPT ══ -->
+<script>
+// ── Chat simulation ────────────────────────────────────────────────────────────
+const chatArea = document.getElementById('chatArea');
+const chatInput = document.getElementById('chatInput');
+
+const conversations = {
+  welcome: [
+    { type: 'out', text: '/start', delay: 500 },
+    { type: 'in', html: '👋 <b>Welcome to ServiceBot!</b><br><br>We provide professional digital services.<br>Choose an option below:', buttons: [['💼 Consultation','📋 Order Service'],['❓ FAQ','📬 Contacts']], delay: 800 },
+  ],
+  faq: [
+    { type: 'btn', label: '❓ FAQ', delay: 300 },
+    { type: 'in', html: '❓ <b>Frequently Asked Questions</b><br><br><b>Q: How do I place an order?</b><br>A: Tap Order Service and fill the form.<br><br><b>Q: Payment methods?</b><br>A: Bank transfer, PayPal, Stripe, Crypto.', buttons: [['🏠 Back to Menu']], delay: 600 },
+  ],
+  order: [
+    { type: 'btn', label: '📋 Order Service', delay: 300 },
+    { type: 'in', html: '📋 <b>New Order Form</b><br><br>Step 1 of 4 — <b>Your full name:</b>', buttons: [['❌ Cancel Order']], delay: 600 },
+    { type: 'out', text: 'John Smith', delay: 1200 },
+    { type: 'in', html: 'Step 2 of 4 — <b>Your email address:</b>', buttons: [['❌ Cancel Order']], delay: 600 },
+    { type: 'out', text: 'john@example.com', delay: 1000 },
+    { type: 'in', html: 'Step 3 of 4 — <b>Your phone number:</b>', buttons: [['❌ Cancel Order']], delay: 600 },
+    { type: 'out', text: '+12025550100', delay: 900 },
+    { type: 'in', html: 'Step 4 of 4 — <b>Describe your task:</b>', buttons: [['❌ Cancel Order']], delay: 600 },
+    { type: 'out', text: 'I need a web audit for my e-commerce site', delay: 1100 },
+    { type: 'in', html: '✅ <b>Order #7 submitted!</b><br><br>👤 John Smith<br>📧 john@example.com<br>📱 +12025550100<br><br>We'll contact you within <b>24 hours</b>. 🙏', delay: 700 },
+  ]
+};
+
+let currentConv = 'welcome';
+let isAnimating = false;
+
+function getTime() {
+  return new Date().toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit', hour12:false });
+}
+
+function createMsg(type, html, buttons) {
+  const wrap = document.createElement('div');
+  wrap.style.display = 'flex';
+  wrap.style.flexDirection = 'column';
+  wrap.style.alignSelf = type === 'out' ? 'flex-end' : 'flex-start';
+  wrap.style.maxWidth = '85%';
+
+  const msg = document.createElement('div');
+  msg.className = type === 'out' ? 'msg-out' : 'msg-in';
+  msg.innerHTML = html + `<div class="msg-time">${getTime()}</div>`;
+
+  wrap.appendChild(msg);
+
+  if (buttons) {
+    buttons.forEach(row => {
+      const rowDiv = document.createElement('div');
+      rowDiv.className = 'tg-btn-row';
+      row.forEach(label => {
+        const btn = document.createElement('button');
+        btn.className = 'tg-inline-btn';
+        btn.textContent = label;
+        btn.onclick = () => handleBtnClick(label);
+        rowDiv.appendChild(btn);
+      });
+      wrap.appendChild(rowDiv);
+    });
+  }
+
+  return wrap;
+}
+
+function appendMsg(type, html, buttons = null) {
+  const el = createMsg(type, html, buttons);
+  chatArea.appendChild(el);
+  chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+async function runConversation(key) {
+  if (isAnimating) return;
+  isAnimating = true;
+  chatArea.innerHTML = '';
+  currentConv = key;
+
+  const steps = conversations[key];
+  for (const step of steps) {
+    await sleep(step.delay);
+    if (step.type === 'out') {
+      chatInput.value = step.text;
+      await sleep(200);
+      appendMsg('out', step.text);
+      chatInput.value = '';
+    } else if (step.type === 'in') {
+      appendMsg('in', step.html, step.buttons || null);
+    }
+  }
+  isAnimating = false;
+}
+
+function handleBtnClick(label) {
+  if (label === '❓ FAQ') runConversation('faq');
+  else if (label === '📋 Order Service') runConversation('order');
+  else if (label === '🏠 Back to Menu') runConversation('welcome');
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// Auto-cycle conversations
+let convCycle = ['welcome', 'order', 'faq'];
+let convIdx = 0;
+
+async function nextConv() {
+  await runConversation(convCycle[convIdx]);
+  convIdx = (convIdx + 1) % convCycle.length;
+  setTimeout(nextConv, 3500);
+}
+
+setTimeout(() => nextConv(), 800);
+
+document.getElementById('sendBtn').addEventListener('click', () => {
+  const val = chatInput.value.trim();
+  if (val && !isAnimating) {
+    appendMsg('out', val);
+    chatInput.value = '';
+  }
+});
+
+// ── Feature tabs ──────────────────────────────────────────────────────────────
+function switchTab(name) {
+  ['user','order','admin','stats'].forEach(t => {
+    document.getElementById(`content-${t}`).style.display = 'none';
+    document.getElementById(`tab-${t}`).classList.remove('active');
+  });
+  document.getElementById(`content-${name}`).style.display = 'block';
+  document.getElementById(`tab-${name}`).classList.add('active');
+
+  if (name === 'stats') renderBarChart();
+}
+
+// ── Code tabs ─────────────────────────────────────────────────────────────────
+function switchCodeTab(name) {
+  ['main','user','db','settings'].forEach(t => {
+    document.getElementById(`ccode-${t}`).style.display = 'none';
+    document.getElementById(`ctab-${t}`).classList.remove('active');
+  });
+  document.getElementById(`ccode-${name}`).style.display = 'block';
+  document.getElementById(`ctab-${name}`).classList.add('active');
+}
+
+// ── Copy code ─────────────────────────────────────────────────────────────────
+function copyCode(containerId) {
+  const el = document.getElementById(containerId);
+  const pre = el.querySelector('pre');
+  const text = pre.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = el.querySelector('button');
+    btn.textContent = 'Copied!';
+    btn.style.color = '#4CAF50';
+    btn.style.borderColor = '#4CAF50';
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }, 2000);
+  });
+}
+
+// ── Admin demo ────────────────────────────────────────────────────────────────
+function exportCSV() {
+  const rows = [
+    ['id','user_id','name','email','phone','description','status','created_at'],
+    ['1','1001','Alice Johnson','alice@corp.io','+1555001','Web audit needed','done','2025-01-15 10:23:00'],
+    ['2','1002','Bob Martinez','bob@startup.com','+1555002','Mobile app MVP','new','2025-01-18 14:45:00'],
+    ['3','1003','Carol Chen','carol@agency.net','+1555003','Consulting session','new','2025-01-20 09:12:00'],
+    ['4','1004','David Kim','david@tech.co','+1555004','Code review req','done','2025-01-22 16:33:00'],
+    ['5','1005','Eva Rossi','eva@design.it','+1555005','UX strategy plan','new','2025-01-24 11:07:00'],
+  ];
+  const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `orders_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function showBroadcast() {
+  const box = document.getElementById('broadcastBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+}
+
+function sendBroadcast() {
+  const msg = document.getElementById('broadcastMsg').value.trim();
+  if (!msg) return;
+  const status = document.getElementById('broadcastStatus');
+  status.textContent = 'Sending…';
+  setTimeout(() => {
+    status.textContent = '✅ Sent to 247 users (5 failed)';
+    document.getElementById('broadcastMsg').value = '';
+  }, 1800);
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+const baseData = [4, 7, 3, 12, 8, 6, 9];
+const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+function renderBarChart() {
+  const chart = document.getElementById('barChart');
+  const labels = document.getElementById('barLabels');
+  chart.innerHTML = '';
+  labels.innerHTML = '';
+  const max = Math.max(...baseData);
+
+  baseData.forEach((val, i) => {
+    const col = document.createElement('div');
+    col.style.display = 'flex';
+    col.style.flexDirection = 'column';
+    col.style.alignItems = 'center';
+    col.style.flex = '1';
+    col.style.gap = '4px';
+
+    const bar = document.createElement('div');
+    bar.style.width = '100%';
+    bar.style.height = '0px';
+    bar.style.background = i === 6
+      ? 'linear-gradient(180deg, #2AABEE, #5288C1)'
+      : 'rgba(42,171,238,0.25)';
+    bar.style.borderRadius = '4px 4px 0 0';
+    bar.style.transition = 'height 0.6s ease';
+    bar.style.cursor = 'default';
+    bar.title = `${days[i]}: ${val} orders`;
+
+    const num = document.createElement('div');
+    num.style.fontSize = '10px';
+    num.style.color = i === 6 ? '#2AABEE' : 'rgba(255,255,255,0.35)';
+    num.style.fontWeight = '600';
+    num.textContent = val;
+
+    col.appendChild(num);
+    col.appendChild(bar);
+    chart.appendChild(col);
+
+    const lbl = document.createElement('div');
+    lbl.style.flex = '1';
+    lbl.style.textAlign = 'center';
+    lbl.style.fontSize = '10px';
+    lbl.style.color = i === 6 ? '#2AABEE' : 'rgba(255,255,255,0.3)';
+    lbl.textContent = days[i];
+    labels.appendChild(lbl);
+
+    setTimeout(() => {
+      bar.style.height = `${(val / max) * 70}px`;
+    }, 100 + i * 60);
+  });
+}
+
+function refreshStats() {
+  const el = (id, val) => {
+    const e = document.getElementById(id);
+    e.style.transform = 'scale(0.8)';
+    e.style.transition = 'transform 0.2s';
+    setTimeout(() => {
+      e.textContent = val;
+      e.style.transform = 'scale(1)';
+    }, 200);
+  };
+  el('stat-users', Math.floor(Math.random() * 50) + 220);
+  el('stat-today', Math.floor(Math.random() * 15) + 3);
+  el('stat-week',  Math.floor(Math.random() * 20) + 25);
+  el('stat-total', Math.floor(Math.random() * 30) + 160);
+  renderBarChart();
+}
+
+// ── Scroll fade-in ────────────────────────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
